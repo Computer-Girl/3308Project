@@ -1,6 +1,7 @@
 # 3308 Project
 
-###Who: Jasmine Rethmann (Computer-Girl) Lucas Dachman (LucasDachman) Nihar Nandan (niharnandan) Jonathan Taing (taingj) Ningtian Ruan (niru32868)
+###Who: 
+Jasmine Rethmann (Computer-Girl) Lucas Dachman (LucasDachman) Nihar Nandan (niharnandan) Jonathan Taing (taingj) Ningtian Ruan (niru32868)
 
 ###Title: Projekt Sunshine
 
