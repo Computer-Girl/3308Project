@@ -1,6 +1,6 @@
-# 3308Project
+# 3308 Project
 
-
+Who: Jasmine Rethmann (Computer-Girl) Lucas Dachman (LucasDachman) Nihar Nandan (Niha..) Jonathan Taing (taingj) Ningtian Ruan (..)
 
 Risks:
   1. Teamates have never worked with eachother
