@@ -2,6 +2,8 @@
 
 Who: Jasmine Rethmann (Computer-Girl) Lucas Dachman (LucasDachman) Nihar Nandan (Niha..) Jonathan Taing (taingj) Ningtian Ruan (..)
 
+Description:
+  
 Risks:
   1. Teamates have never worked with eachother
   2. Some teammates have never worked with Java
