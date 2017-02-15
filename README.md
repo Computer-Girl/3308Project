@@ -6,7 +6,7 @@ Jasmine Rethmann (Computer-Girl) Lucas Dachman (LucasDachman) Nihar Nandan (niha
 
 ###Title: 
 
-Projekt Sunshine
+Let's Go
 
 ###Description:
 
@@ -52,3 +52,4 @@ Github, Trello
 
 ###Project Plan:
 
+Screenshots in this repository
