@@ -11,7 +11,7 @@ events, has an API to Google calendar to set reminders for user for an event
 they approved, API to Google maps that wil have a limited-mile radius off the Boulder campus with different places highlighted.  User has to login with
 .edu email to verify they're a student, and once they're in they can invite other friends to events.
 
-Vision statement: Finding Campus events mad
+Vision statement: Finding campus events made easier
 
 Motivation:
 
