@@ -52,7 +52,11 @@ Github, Trello
 
 ###Project Plan:
 
-Screenshots in this repository
 ![screenshot of github part1](https://cloud.githubusercontent.com/assets/18471032/23008147/fe133896-f3ca-11e6-9264-d80668e245c3.jpeg)
 
 For tracking our project, we use Github to improve the project and share our code with teammates, professor and TAs. 
+
+![screenshot of trello part1 1](https://cloud.githubusercontent.com/assets/18471032/23008377/5f062306-f3cc-11e6-8804-175ee1d4f5f4.jpeg)
+![screenshot of trello part1 2](https://cloud.githubusercontent.com/assets/18471032/23008378/5f066438-f3cc-11e6-9115-04f1fbbadfcc.jpeg)
+
+On the other hand, we use Trello to distribute different tasks to each member and check the process of our project.
