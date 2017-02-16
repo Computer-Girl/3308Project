@@ -53,3 +53,6 @@ Github, Trello
 ###Project Plan:
 
 Screenshots in this repository
+![screenshot of github part1](https://cloud.githubusercontent.com/assets/18471032/23008147/fe133896-f3ca-11e6-9264-d80668e245c3.jpeg)
+
+For tracking our project, we use Github to improve the project and share our code with teammates, professor and TAs. 
