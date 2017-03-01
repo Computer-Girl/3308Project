@@ -1,4 +1,4 @@
-package dachman.lucas.letsgo;
+package dachman.lucas.letsgoapp2;
 
 import java.util.Date;
 
