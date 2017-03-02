@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LetsGoApp2</string>
+    <string name="title_activity_event_view">EventViewActivity</string>
 </resources>

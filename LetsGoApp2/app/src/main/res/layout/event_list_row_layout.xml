@@ -4,14 +4,14 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/event_list2_Image"
+        android:id="@+id/event_list_row_Image"
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_event_available_black_24dp"/>
     <TextView
         android:padding="8dp"
-        android:id="@+id/event_list2_EventName"
+        android:id="@+id/event_list_row_EventName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event name"/>
