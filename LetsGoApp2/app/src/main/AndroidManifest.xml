@@ -14,13 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".EventListActivity"
             android:label="EventListActiviy"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".LoginActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dachman.lucas.letsgoapp2.LoginActivity" />
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".EventViewActivity"
@@ -31,15 +35,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dachman.lucas.letsgoapp2.EventListActivity" />
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
 
-        </activity>
     </application>
 
 </manifest>
