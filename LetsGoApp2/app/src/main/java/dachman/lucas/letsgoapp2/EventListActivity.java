@@ -43,13 +43,16 @@ public class EventListActivity extends AppCompatActivity {
 
          */
 
+        // list of Events used to populate Recycler View
         events = new ArrayList<Event>();
-        Event event1 = new Event();
-        Event event2 = new Event();
-        event1.setName("Event1");
-        event2.setName("Event 2");
-        events.add(event1);
-        events.add(event2);
+
+        // TODO: delete this
+        // Arbitrary Event objects for demo:
+        final int MILLIS_IN_DAY = 86400000;
+        for(int i=0; i < 20; i++) {
+            Event e = new Event(i, "Event "+i, "UMC", new Date(System.currentTimeMillis()+i*MILLIS_IN_DAY));
+            events.add(e);
+        }
 
 
         recyclerView = (RecyclerView) findViewById(R.id.event_list_RecyclerView);
