@@ -36,7 +36,7 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * TODO: replace this activity with jonathans login activity
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 

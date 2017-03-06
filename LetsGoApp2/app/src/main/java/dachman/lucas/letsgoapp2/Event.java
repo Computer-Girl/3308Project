@@ -13,8 +13,9 @@ import java.util.Date;
  * passed between activities through an Intent.
  *
  * If you change this class, use the Android Studio Parcelable plugin to
- *      generate boilerplate Parcelable code. This class will break
- *      if parcelable methods are not overrided correctly.
+ *      generate boilerplate Parcelable code. Alt+Insert -> Parcelable.
+ *      This class will break if parcelable methods are not overrided
+ *      correctly.
  */
 
 public class Event implements Parcelable{
@@ -34,6 +35,8 @@ public class Event implements Parcelable{
     private String description = "No Description";
     private int id;
     private Date date;
+    private boolean showAsStarred = false;
+
 
     public Event(int _id, String _name, String _location, Date _date) {
         id = _id;
@@ -108,6 +111,13 @@ public class Event implements Parcelable{
         this.description = description;
     }
 
+    public boolean isShowAsStarred() {
+        return showAsStarred;
+    }
+
+    public void setShowAsStarred(boolean showAsStarred) {
+        this.showAsStarred = showAsStarred;
+    }
 
     @Override
     public int describeContents() {
@@ -123,6 +133,7 @@ public class Event implements Parcelable{
         dest.writeString(this.description);
         dest.writeInt(this.id);
         dest.writeLong(this.date != null ? this.date.getTime() : -1);
+        dest.writeByte(this.showAsStarred ? (byte) 1 : (byte) 0);
     }
 
     protected Event(Parcel in) {
@@ -134,6 +145,7 @@ public class Event implements Parcelable{
         this.id = in.readInt();
         long tmpDate = in.readLong();
         this.date = tmpDate == -1 ? null : new Date(tmpDate);
+        this.showAsStarred = in.readByte() != 0;
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {

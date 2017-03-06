@@ -17,13 +17,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:text="Event Date"
         android:id="@+id/event_view_date"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:text="Event Location"
+        android:id="@+id/event_view_location"
         android:layout_below="@+id/event_view_date"
-        android:id="@+id/event_view_location"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp" />
 
 
 </RelativeLayout>
