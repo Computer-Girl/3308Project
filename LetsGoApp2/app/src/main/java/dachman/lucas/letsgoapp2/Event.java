@@ -7,13 +7,36 @@ import java.util.Date;
 
 /**
  * Created by lucas on 2/19/17.
+ * This is a Model Class for an Event Object.
+ * Set the category field with a CATEGORY constant
+ * This class implements Parcelable in order for it to be
+ * passed between activities through an Intent.
+ *
+ * If you change this class, use the Android Studio Parcelable plugin to
+ *      generate boilerplate Parcelable code. Alt+Insert -> Parcelable.
+ *      This class will break if parcelable methods are not overrided
+ *      correctly.
  */
 
 public class Event implements Parcelable{
 
-    private String name, location;
+    // Category Constants
+    public static final String CATEGORY_SPORTS = "sports";
+    public static final String CATEGORY_CAREER = "career";
+    public static final String CATEGORY_GREEK = "greek";
+    public static final String CATEGORY_CULTURAL = "cultural";
+    public static final String CATEGORY_ARTISTIC = "artistic";
+    public static final String CATEGORY_NONE = "none";
+
+    private String name;
+    private String location;
+    private String organizerName = "none";
+    private String category = CATEGORY_NONE;
+    private String description = "No Description";
     private int id;
     private Date date;
+    private boolean showAsStarred = false;
+
 
     public Event(int _id, String _name, String _location, Date _date) {
         id = _id;
@@ -30,24 +53,7 @@ public class Event implements Parcelable{
 
     }
 
-    protected Event(Parcel in) {
-        name = in.readString();
-        location = in.readString();
-        id = in.readInt();
-        date = new Date(in.readLong());
-    }
-
-    public static final Creator<Event> CREATOR = new Creator<Event>() {
-        @Override
-        public Event createFromParcel(Parcel in) {
-            return new Event(in);
-        }
-
-        @Override
-        public Event[] newArray(int size) {
-            return new Event[size];
-        }
-    };
+    /***** Getters and Setters ****/
 
     public String getName() {
         return name;
@@ -81,6 +87,38 @@ public class Event implements Parcelable{
         this.date = date;
     }
 
+    public String getOrganizerName() {
+        return organizerName;
+    }
+
+    public void setOrganizerName(String organizerName) {
+        this.organizerName = organizerName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isShowAsStarred() {
+        return showAsStarred;
+    }
+
+    public void setShowAsStarred(boolean showAsStarred) {
+        this.showAsStarred = showAsStarred;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -88,9 +126,37 @@ public class Event implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(location);
-        dest.writeInt(id);
-        dest.writeLong(date.getTime());
+        dest.writeString(this.name);
+        dest.writeString(this.location);
+        dest.writeString(this.organizerName);
+        dest.writeString(this.category);
+        dest.writeString(this.description);
+        dest.writeInt(this.id);
+        dest.writeLong(this.date != null ? this.date.getTime() : -1);
+        dest.writeByte(this.showAsStarred ? (byte) 1 : (byte) 0);
     }
+
+    protected Event(Parcel in) {
+        this.name = in.readString();
+        this.location = in.readString();
+        this.organizerName = in.readString();
+        this.category = in.readString();
+        this.description = in.readString();
+        this.id = in.readInt();
+        long tmpDate = in.readLong();
+        this.date = tmpDate == -1 ? null : new Date(tmpDate);
+        this.showAsStarred = in.readByte() != 0;
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel source) {
+            return new Event(source);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 }
