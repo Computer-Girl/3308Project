@@ -34,6 +34,7 @@ public class EventViewActivity extends AppCompatActivity {
 
     private void setUpStarButton() {
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.star_button);
+
         changeStarIcon(fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +63,6 @@ public class EventViewActivity extends AppCompatActivity {
             }
         }
     }
-
     private void populateViews() {
 
         TextView date = (TextView) findViewById(R.id.event_view_date);
