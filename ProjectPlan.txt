@@ -9,8 +9,8 @@ Project Plan: Basic Development i.e. what MUST be done
 
 2. Settings screen
 
-	- If we need user to change something in settings. let's do this up 
-	  front, if not ignore this step.
+	- If we need user to change something in settings, let's do this up 
+	  front. If not ignore this step.
 
 3. Events screen
 	- What we need for the BASIC app: events on campus.  Once we
@@ -18,7 +18,7 @@ Project Plan: Basic Development i.e. what MUST be done
           campus.
 
 4. Events listing screen
-	- Once user clicks on events on campus, list of categories should appear          i.e. Athletic events, Cultural events, etc. 
+	- Once user clicks on events on campus, list of categories should appear i.e. Athletic events, Cultural events, etc. 
 
 5. Events listing screen cont.
 	- User will pick category of events, and all events should be listed
