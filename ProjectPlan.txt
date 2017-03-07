@@ -1,4 +1,4 @@
-##roject Plan: Basic Development i.e. what MUST be done
+Project Plan: Basic Development i.e. what MUST be done
 
 1. Login screen
 	- give option to login
