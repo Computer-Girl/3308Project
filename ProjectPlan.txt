@@ -1,0 +1,60 @@
+Project Plan: Basic Development i.e. what MUST be done
+
+1. Login screen
+	- give option to login
+		- only accept gmail account
+		- takes password
+	- if not an old user, give option to create account
+		- Need full name, age, major, phone number
+
+2. Settings screen
+
+	- If we need user to change something in settings, let's do this up 
+	  front. If not ignore this step.
+
+3. Events screen
+	- What we need for the BASIC app: events on campus.  Once we
+          finish the events on campus, we can see about adding events off 
+          campus.
+
+4. Events listing screen
+	- Once user clicks on events on campus, list of categories should appear i.e. Athletic events, Cultural events, etc. 
+
+5. Events listing screen cont.
+	- User will pick category of events, and all events should be listed
+          (sorted by event date/time preferably)
+
+6. Logistics of Event screen
+	- Info of event: 
+	  When event is picked, screen displays information
+	  like title of event, date, time, location.
+  
+	- Map: 
+	  There should be an option to pull up a map to find it.  Let's see if 
+	  we would be able to offer interactive directions from
+	  user's current location to destination thru Google Maps.
+
+	- Star repo:
+	  This screen should also include the option to STAR an event the user
+	  is interested in.  Will keep in repository for them to revisit later.
+
+	- Calendar:
+	  Option to save to Google Calendar and possibly invite others through 
+	  the calendar. 
+
+7. Star repository screen
+	- User should be able to access a list of all the events starred
+	  (sorted by date/time preferably).
+
+Things to consider:
+
+- Navigation thru app: Do we want to have a side bar to access certain screens    or back button?
+
+- Only consider any EXTRA features (such as events off campus, friends
+  component of app, etc.) after the above BASICS are done.
+
+*** Any other thoughts/modifications/suggestions please text the group
+
+
+
+
