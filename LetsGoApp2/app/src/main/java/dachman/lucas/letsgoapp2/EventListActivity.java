@@ -50,7 +50,7 @@ public class EventListActivity extends AppCompatActivity {
         }
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.event_list_RecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.event_list_fragment_RecyclerView);
         adapter = new EventListRecyclerAdapter(context, events);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

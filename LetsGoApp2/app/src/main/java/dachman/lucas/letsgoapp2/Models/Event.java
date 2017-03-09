@@ -21,17 +21,11 @@ import java.util.Date;
 public class Event implements Parcelable{
 
     // Category Constants
-    public static final String CATEGORY_SPORTS = "sports";
-    public static final String CATEGORY_CAREER = "career";
-    public static final String CATEGORY_GREEK = "greek";
-    public static final String CATEGORY_CULTURAL = "cultural";
-    public static final String CATEGORY_ARTISTIC = "artistic";
-    public static final String CATEGORY_NONE = "none";
 
     private String name;
     private String location;
     private String organizerName = "none";
-    private String category = CATEGORY_NONE;
+    private Category category = Category.OTHER;
     private String description = "No Description";
     private int id;
     private Date date;
@@ -95,11 +89,11 @@ public class Event implements Parcelable{
         this.organizerName = organizerName;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -129,7 +123,7 @@ public class Event implements Parcelable{
         dest.writeString(this.name);
         dest.writeString(this.location);
         dest.writeString(this.organizerName);
-        dest.writeString(this.category);
+        dest.writeInt(this.category == null ? -1 : this.category.ordinal());
         dest.writeString(this.description);
         dest.writeInt(this.id);
         dest.writeLong(this.date != null ? this.date.getTime() : -1);
@@ -140,7 +134,8 @@ public class Event implements Parcelable{
         this.name = in.readString();
         this.location = in.readString();
         this.organizerName = in.readString();
-        this.category = in.readString();
+        int tmpCategory = in.readInt();
+        this.category = tmpCategory == -1 ? null : Category.values()[tmpCategory];
         this.description = in.readString();
         this.id = in.readInt();
         long tmpDate = in.readLong();

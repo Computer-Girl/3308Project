@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Date;
 
+import dachman.lucas.letsgoapp2.EventGenerator;
 import dachman.lucas.letsgoapp2.Models.Category;
 import dachman.lucas.letsgoapp2.Models.Event;
 import dachman.lucas.letsgoapp2.Adapters.EventListRecyclerAdapter;
@@ -46,18 +48,20 @@ public class EventListAllFragment extends Fragment {
 
         // list of Events used to populate Recycler View
         events = new ArrayList<Event>();
-        addEvents(events);
+        addEvents(events, category);
 
     }
 
     // Add Arbitrary events for testing
-    public static void addEvents(ArrayList<Event> list) {
+    public static void addEvents(ArrayList<Event> list, Category category) {
         // TODO: delete this
         // Arbitrary Event objects for demo:
-        final int MILLIS_IN_DAY = 86400000;
-        for(int i=0; i < 20; i++) {
-            Event e = new Event(i, "Event "+i, "UMC", new Date(System.currentTimeMillis()+i*MILLIS_IN_DAY));
-            list.add(e);
+        Event [] tempEvents = EventGenerator.getEvents();
+        for(Event e : tempEvents) {
+            if(e.getCategory() == category) {
+                Log.d("Test", e.getName());
+                list.add(e);
+            }
         }
     }
 
@@ -66,7 +70,7 @@ public class EventListAllFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_event_list_all, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.event_list_RecyclerView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.event_list_fragment_RecyclerView);
         adapter = new EventListRecyclerAdapter(v.getContext(), events);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
