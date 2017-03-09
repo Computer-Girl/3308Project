@@ -1,4 +1,4 @@
-package dachman.lucas.letsgoapp2;
+package dachman.lucas.letsgoapp2.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -350,7 +350,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void startEventListActivity() {
-        Intent intent = new Intent(getApplicationContext(), EventListActivity.class);
+        //Intent intent = new Intent(getApplicationContext(), EventListActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TabbedEventListActivity.class);
         startActivity(intent);
     }
 }

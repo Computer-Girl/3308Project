@@ -1,7 +1,5 @@
 package dachman.lucas.letsgoapp2;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+
+import dachman.lucas.letsgoapp2.Models.Event;
 
 public class EventViewActivity extends AppCompatActivity {
 

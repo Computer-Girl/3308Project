@@ -1,4 +1,4 @@
-package dachman.lucas.letsgoapp2;
+package dachman.lucas.letsgoapp2.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import dachman.lucas.letsgoapp2.Models.Event;
+import dachman.lucas.letsgoapp2.EventViewActivity;
+import dachman.lucas.letsgoapp2.R;
 
 /**
  * Created by lucas on 3/8/17.
