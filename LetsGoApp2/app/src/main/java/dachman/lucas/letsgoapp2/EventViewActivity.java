@@ -1,5 +1,6 @@
 package dachman.lucas.letsgoapp2;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 
@@ -67,11 +69,25 @@ public class EventViewActivity extends AppCompatActivity {
 
         TextView date = (TextView) findViewById(R.id.event_view_date);
         TextView location = (TextView) findViewById(R.id.event_view_location);
+        TextView description = (TextView) findViewById(R.id.event_view_description);
+        TextView organizerName = (TextView) findViewById(R.id.event_view_organizerName);
 
+        // Set Text for Date TextView
         String dateString = DateFormat.getDateInstance().format(currentEvent.getDate());
         date.setText(dateString);
+        //Set Text for location TextView
         location.setText(currentEvent.getLocation());
+        //Set Text for description TextView
+        description.setText(currentEvent.getDescription());
+        //Set Text for Organizer Name
+        organizerName.setText(currentEvent.getOrganizerName());
+        //Set Toolbar title to current event Name
         getSupportActionBar().setTitle(currentEvent.getName());
+    }
+
+    public void onClickMap(View view) {
+        //TODO: Start map activity or fragment
+        Toast.makeText(getApplicationContext(), "Maps not yet implemented", Toast.LENGTH_LONG).show();
     }
 
 }
