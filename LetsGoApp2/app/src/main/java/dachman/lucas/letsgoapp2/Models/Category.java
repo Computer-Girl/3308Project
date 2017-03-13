@@ -13,10 +13,18 @@ public enum Category {
     ARTISTIC("Artistic"),                   // Movies, Music, Theater
     OTHER("Other");
 
+
     private String name;
+    // Use this string to display the enum name
     public static final String NAME = "CATEGORY";
 
     private Category(String name) {
         this.name = name;
+    }
+
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

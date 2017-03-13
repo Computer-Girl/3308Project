@@ -34,6 +34,6 @@ public class mFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return categories[position].name();
+        return categories[position].toString();
     }
 }
