@@ -25,11 +25,11 @@
         <activity
             android:name=".EventViewActivity"
             android:label="@string/title_activity_event_view"
-            android:parentActivityName=".EventListActivity"
+            android:parentActivityName=".TabbedEventListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dachman.lucas.letsgoapp2.EventListActivity" />
+                android:value="dachman.lucas.letsgoapp2.TabbedEventListActivity" />
         </activity>
         <activity android:name=".TabbedEventListActivity"></activity>
     </application>
