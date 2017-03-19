@@ -14,14 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+            android:name=".Models.OpeningPage"
+            android:label="@string/app_name">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+
         </activity>
+
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
+
+        </activity>
+
         <activity
             android:name=".EventViewActivity"
             android:label="@string/title_activity_event_view"
@@ -31,7 +39,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dachman.lucas.letsgoapp2.TabbedEventListActivity" />
         </activity>
-        <activity android:name=".TabbedEventListActivity"></activity>
+        <activity android:name=".TabbedEventListActivity" />
+
     </application>
 
 </manifest>
