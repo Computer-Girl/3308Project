@@ -1,0 +1,39 @@
+<resources>
+    <!--- App information-->
+    <string name="app_name">Let\'s Go</string>
+
+    <!--- Login Activity-->
+    <string name="activity_login_label">Login</string>
+    <string name="login_email_label">email:</string>
+    <string name="login_password_label">password:</string>
+    <string name="login_failure">Email/password incorrect, try again.</string>
+
+        <!--- Create Account (sub-category of Login)-->
+        <string name="create_account_fname">First name:</string>
+        <string name="create_account_lname">Last name:</string>
+        <string name="create_account_email">Email:</string>
+        <!---Not sure if we need phone num-->
+        <string name="create_account_phone">Phone Number:</string>
+        <string name="create_account_password">Password:</string>
+        <string name="create_account_passwordcheck">Re-enter Password:</string>
+
+    <!--- Categories list-->
+
+
+    <!--- List of events under a category-->
+    
+
+    <!--- Individual Event Screen-->
+
+    <string name="event_title">Title:</string>
+    <string name="event_date">Date:</string>
+    <string name="event_time">Time:</string>
+    <string name="event_location">Location:</string>
+        <string name="event_location_map">Checkout Google Maps</string>
+    <string name="event_calendar">Add to Google Calendar</string>
+    
+
+
+
+</resources>
+
