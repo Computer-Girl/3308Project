@@ -13,11 +13,11 @@
     android:weightSum="1">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/opening_activity_pic"
-        android:layout_weight="0.46" />
+        android:layout_weight="0.32"
+        app:srcCompat="@mipmap/opening_activity_logo" />
 
     <EditText
         android:id="@+id/editText2"
@@ -33,5 +33,12 @@
         android:layout_height="wrap_content"
         android:onClick="onClickLogin"
         android:text="@string/welcome_button" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/opening_activity_pic"
+        android:layout_weight="0.46" />
 
 </LinearLayout>
