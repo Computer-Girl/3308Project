@@ -1,10 +1,11 @@
 package dachman.lucas.letsgoapp2.Models;
-
+/**
+ * Created by Jasmine on 3/19/17.
+ */
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
 import dachman.lucas.letsgoapp2.R;
 import dachman.lucas.letsgoapp2.LoginActivity;
 
@@ -18,6 +19,5 @@ public class OpeningPage extends AppCompatActivity {
     public void onClickLogin(View view) {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
-
     }
 }

@@ -21,7 +21,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_event_view" />
+    <include layout="@layout/content_event_view"
+        android:layout_height="469dp"
+        android:id="@+id/include2" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/star_button"

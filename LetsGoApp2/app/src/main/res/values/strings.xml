@@ -1,10 +1,11 @@
 <resources>
+
     <!--- App information-->
     <string name="app_name">Let\'s Go</string>
     <string name="title_activity_login">Let\'s Go</string>
 
-    <!---Welcome Activity-->
-    <string name="welcome_label">What do you want to do today?      Let\'s see what CU has planned!</string>
+    <!---Opening Page Activity-->
+    <string name="welcome_label">What do you want to do today?Let\'s see what CU has planned!</string>
     <string name="welcome_button">Next</string>
 
     <!--- Login Activity: Existing User-->
@@ -15,7 +16,8 @@
     <string name="login_oldUser_field_failure">This field is required</string>
 
     <!--- Login Activity: New User-->
-    <string name="login_newUser_prompt">\n Don\'t have an account? Create one below \n</string>
+    <string name="login_newUser_prompt">Don\'t have an account? Create one below \n</string>
+    <string name="login_newUser_prompt_button">Create one here</string>
     <string name="login_newUser_fname">First name: </string>
     <string name="login_newUser_email">Email: </string>
     <string name="login_newUser_password0">Password:</string>
