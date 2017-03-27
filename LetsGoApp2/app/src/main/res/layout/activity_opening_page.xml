@@ -38,7 +38,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/opening_activity_pic"
+        app:srcCompat="@mipmap/opening_activity_logo"
         android:layout_weight="0.46" />
 
 </LinearLayout>

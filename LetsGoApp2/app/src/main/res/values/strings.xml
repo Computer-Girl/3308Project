@@ -24,9 +24,14 @@
     <string name="login_newUser_password1">Re-enter Password:</string>
     <string name="login_newUser_failure">Passwords do not match, try again.</string>
 
-    <!--- Login Activity: Submit Button -->
+    <!--- Login Activity: -->
     <string name="login_button">Submit</string>
+    <string name="title_text">What do you want to do today?\nLet\'s see what CU has planned!</string>
 
+    <!-- Sign-in status messages -->
+    <string name="signed_out">Signed out</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="loading">Loading…</string>
 
     <!--- Categories list-->
 
