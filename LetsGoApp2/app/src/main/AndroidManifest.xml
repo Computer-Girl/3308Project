@@ -9,17 +9,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/opening_activity_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/app_name">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -31,7 +31,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dachman.lucas.letsgoapp2.TabbedEventListActivity" />
         </activity>
-        <activity android:name=".TabbedEventListActivity"></activity>
+        <activity android:name=".TabbedEventListActivity" />
+        <activity android:name=".Models.OpeningPage"></activity>
     </application>
 
 </manifest>
