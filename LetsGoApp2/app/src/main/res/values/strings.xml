@@ -33,6 +33,10 @@
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="loading">Loading…</string>
 
+    <!-- Button labels -->
+    <string name="sign_out">Sign Out</string>
+
+
     <!--- Categories list-->
 
 
