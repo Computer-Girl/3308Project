@@ -1,21 +1,62 @@
 <resources>
-    <string name="app_name">Let\'s Go</string>
-    <string name="title_activity_event_view">Event Name</string>
-    <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <!--- App information-->
+    <string name="app_name">Let\'s Go</string>
+    <string name="title_activity_login">Let\'s Go</string>
+
+    <!---Opening Page Activity-->
+    <string name="welcome_label">What do you want to do today?Let\'s see what CU has planned!</string>
+    <string name="welcome_button">Next</string>
+
+    <!--- Login Activity: Existing User-->
+    <string name="login_label">Login</string>
+    <string name="login_oldUser_email_label">Email: </string>
+    <string name="login_oldUser_password_label">Password: </string>
+    <string name="login_oldUser_input_failure">Email/password incorrect, try again.</string>
+    <string name="login_oldUser_field_failure">This field is required</string>
+
+    <!--- Login Activity: New User-->
+    <string name="login_newUser_prompt">Don\'t have an account? Create one below \n</string>
+    <string name="login_newUser_prompt_button">Create one here</string>
+    <string name="login_newUser_fname">First name: </string>
+    <string name="login_newUser_email">Email: </string>
+    <string name="login_newUser_password0">Password:</string>
+    <string name="login_newUser_password1">Re-enter Password:</string>
+    <string name="login_newUser_failure">Passwords do not match, try again.</string>
+
+    <!--- Login Activity: -->
+    <string name="login_button">Submit</string>
+    <string name="title_text">What do you want to do today?\nLet\'s see what CU has planned!</string>
+
+    <!-- Sign-in status messages -->
+    <string name="signed_out">Signed out</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="loading">Loading…</string>
+
+    <!-- Button labels -->
+    <string name="sign_out">Sign Out</string>
+
+
+    <!--- Categories list-->
+
+
+    <!--- List of events under a category-->
+
+
+    <!--- Individual Event Screen-->
+
+    <string name="event_title">Event Title: </string>
+    <string name="event_date">Event Date:</string>
+    <string name="event_time">Event Time:</string>
+    <string name="event_location">Event Location:</string>
+    <string name="event_location_map">Checkout Google Maps</string>
+    <string name="event_calendar">Add to Google Calendar</string>
+
+    <string name="title_activity_event_view">Event Name</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
