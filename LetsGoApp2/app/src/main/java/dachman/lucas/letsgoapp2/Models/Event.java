@@ -101,6 +101,18 @@ public class Event implements Parcelable{
         return description;
     }
 
+    public String getDescriptionShort() {
+        String s;
+        try {
+            s = description.substring(0,50);
+        } catch (IndexOutOfBoundsException e) {
+            return description;
+        }
+        s += "...";
+        return s;
+
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
