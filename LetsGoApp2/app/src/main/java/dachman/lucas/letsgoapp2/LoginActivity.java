@@ -198,4 +198,10 @@ public class LoginActivity extends AppCompatActivity implements
                 break;*/
         }
     }
+
+    public void onClickTest(View v) {
+        Intent intent = new Intent(getApplicationContext(), TabbedEventListActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
