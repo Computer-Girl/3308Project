@@ -1,4 +1,8 @@
+
+
 <resources>
+
+    <!-- Modded JR 3/8/17-->
 
     <!--- App information-->
     <string name="app_name">Let\'s Go</string>
@@ -8,24 +12,26 @@
     <string name="welcome_label">What do you want to do today?Let\'s see what CU has planned!</string>
     <string name="welcome_button">Next</string>
 
-    <!--- Login Activity: Existing User-->
-    <string name="login_label">Login</string>
-    <string name="login_oldUser_email_label">Email: </string>
-    <string name="login_oldUser_password_label">Password: </string>
-    <string name="login_oldUser_input_failure">Email/password incorrect, try again.</string>
-    <string name="login_oldUser_field_failure">This field is required</string>
+    <!---Login Activity-->
 
-    <!--- Login Activity: New User-->
-    <string name="login_newUser_prompt">Don\'t have an account? Create one below \n</string>
-    <string name="login_newUser_prompt_button">Create one here</string>
-    <string name="login_newUser_fname">First name: </string>
-    <string name="login_newUser_email">Email: </string>
-    <string name="login_newUser_password0">Password:</string>
-    <string name="login_newUser_password1">Re-enter Password:</string>
-    <string name="login_newUser_failure">Passwords do not match, try again.</string>
+            <!--- Login Activity: Existing User-->
+            <string name="login_label">Login</string>
+            <string name="login_oldUser_email_label">Email: </string>
+            <string name="login_oldUser_password_label">Password: </string>
+            <string name="login_oldUser_input_failure">Email/password incorrect, try again.</string>
+            <string name="login_oldUser_field_failure">This field is required</string>
 
-    <!--- Login Activity: Submit Button -->
-    <string name="login_button">Submit</string>
+            <!--- Login Activity: New User-->
+            <string name="login_newUser_prompt">Don\'t have an account? Create one below \n</string>
+            <string name="login_newUser_prompt_button">Create one here</string>
+            <string name="login_newUser_fname">First name: </string>
+            <string name="login_newUser_email">Email: </string>
+            <string name="login_newUser_password0">Password:</string>
+            <string name="login_newUser_password1">Re-enter Password:</string>
+            <string name="login_newUser_failure">Passwords do not match, try again.</string>
+
+            <!--- Login Activity: Submit Button -->
+            <string name="login_button">Submit</string>
 
 
     <!--- Categories list-->
@@ -41,8 +47,7 @@
     <string name="event_time">Event Time:</string>
     <string name="event_location">Event Location:</string>
     <string name="event_location_map">Checkout Google Maps</string>
-    <string name="event_calendar">Add to Google Calendar</string>
-
+    <string name="event_calendar">Add to Calendar</string>
     <string name="title_activity_event_view">Event Name</string>
 
 

@@ -104,7 +104,18 @@
             android:onClick="onClickMap"
             android:layout_below="@+id/event_view_location"
             android:layout_alignLeft="@+id/event_view_location"
-            android:layout_alignStart="@+id/event_view_location" />
+            android:layout_alignStart="@+id/event_view_location"
+            android:id="@+id/button2" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:onClick="onClickCalendar"
+            android:text="@string/event_calendar" />
+
     </RelativeLayout>
 
 </ScrollView>

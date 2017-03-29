@@ -13,22 +13,38 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--
+        JR 3/19/17 Using Splash Screen instead
         <activity
             android:name=".Models.OpeningPage"
             android:label="@string/app_name">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+        </activity>
+        -->
 
+
+        <!-- JR 3/29/17 Splash Screen Addition -->
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
+        <!-- Login Activity -->
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/title_activity_login" />
 
-        </activity>
-
+        <!-- Event View Activity -->
         <activity
             android:name=".EventViewActivity"
             android:label="@string/title_activity_event_view"
@@ -39,7 +55,6 @@
                 android:value="dachman.lucas.letsgoapp2.TabbedEventListActivity" />
         </activity>
         <activity android:name=".TabbedEventListActivity" />
-
     </application>
 
 </manifest>

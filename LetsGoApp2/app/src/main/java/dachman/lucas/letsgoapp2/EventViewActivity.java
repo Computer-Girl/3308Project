@@ -85,9 +85,15 @@ public class EventViewActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(currentEvent.getName());
     }
 
+    /* Map functionality*/
     public void onClickMap(View view) {
         //TODO: Start map activity or fragment
         Toast.makeText(getApplicationContext(), "Maps not yet implemented", Toast.LENGTH_LONG).show();
     }
 
+    /*JR 3/29/17*/
+    /*Calendar Functionality*/
+    public void onClickCalendar(View view){
+        Toast.makeText(getApplicationContext(), "Calendar not yet implemented", Toast.LENGTH_LONG).show();
+    }
 }
