@@ -81,4 +81,3 @@ public class EventListRecyclerAdapter extends RecyclerView.Adapter<EventListRecy
         }
     }
 }
-
