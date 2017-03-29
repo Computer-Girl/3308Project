@@ -43,7 +43,7 @@ public class EventListRecyclerAdapter extends RecyclerView.Adapter<EventListRecy
     public void onBindViewHolder(EventListViewHolder holder, int position) {
         Event currentEvent = eventsList.get(position);
         holder.eventNameView.setText(currentEvent.getName());
-
+        holder.eventDescriptionView.setText(currentEvent.getDescriptionShort());
         //set id of itemView to corespond to Event Object in eventList
         holder.itemView.setId(position);
 
@@ -59,13 +59,15 @@ public class EventListRecyclerAdapter extends RecyclerView.Adapter<EventListRecy
 
         ImageView imageView;
         TextView eventNameView;
+        TextView eventDescriptionView;
 
         public EventListViewHolder(View itemView) {
             super(itemView);
 
             imageView = (ImageView) itemView.findViewById(R.id.event_list_row_Image);
             eventNameView = (TextView) itemView.findViewById(R.id.event_list_row_EventName);
-            //set onClick listener
+            eventDescriptionView = (TextView) itemView.findViewById(R.id.event_list_row_EventDescription);
+            //set onClick listener to view more event info
             itemView.setOnClickListener(this);
         }
 
