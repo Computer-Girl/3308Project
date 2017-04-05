@@ -1,5 +1,6 @@
 package dachman.lucas.letsgoapp2.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,15 +49,15 @@ public class EventListAllFragment extends Fragment {
 
         // list of Events used to populate Recycler View
         events = new ArrayList<Event>();
-        addEvents(events, category);
+        addEvents(events, category, getContext());
 
     }
 
     // Add Arbitrary events for testing
-    public static void addEvents(ArrayList<Event> list, Category category) {
-        // TODO: delete this
-        // Arbitrary Event objects for demo:
-        Event [] tempEvents = EventGenerator.getEvents();
+    public static void addEvents(ArrayList<Event> list, Category category, Context context) {
+        // Populate arraylist to be given to Recycler adapter:
+        EventGenerator eg = EventGenerator.getInstance(context);
+        ArrayList<Event> tempEvents = eg.getEvents();
         for(Event e : tempEvents) {
             if(e.getCategory() == category) {
                 Log.d("Test", e.getName());
