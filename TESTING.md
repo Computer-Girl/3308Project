@@ -5,7 +5,7 @@
 
 ****We used the JUnit framework and Espresso to develop test cases for the app in Android Studio****
 
-****Code is in this testing branch: LoginUITest.java, EventViewActivityTest.java, & LoginActivityTest.java****
+****Code is in branch called "testing": LoginUITest.java, EventViewActivityTest.java, & LoginActivityTest.java****
 
 
 
