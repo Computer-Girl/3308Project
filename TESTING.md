@@ -1,6 +1,10 @@
-****TESTING.md****
+# TESTING.md
 
 ****We used the JUnit framework and Espresso to develop test cases for the app in Android Studio****
+
+****Code is in this testing branch: LoginUITest.java, EventViewActivityTest.java, & LoginActivityTest.java****
+
+
 
 
 **Who:** Ningtian Ruan, Jasmine Rethmann, Lucas Dachman, Jonathan Taing, Nihar Nandan
