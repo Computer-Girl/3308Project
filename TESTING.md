@@ -165,5 +165,7 @@
 		Shows a successful completion of basic UI login/logout functionality
 		as an instrumated test. In other words, it tested under the conditions 
 		of android's Virtual Hardware Device platform.
+![loginactivitytestoutput](https://cloud.githubusercontent.com/assets/25514798/24771031/50d8c774-1ac9-11e7-8665-41cc5106f801.png)
+
 
 
