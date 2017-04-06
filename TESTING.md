@@ -96,5 +96,51 @@
 
 
 
-3. <(put filename here)> (Test Google Sign-in API accessibility, navigation, and permissions for user) 
+3. LoginActivityTest.java (A test to demonstrate basic user login and log out functionality using Espresso Test Recorder, a UI testing tool provided by Android Studio. It provides an alternative to tradional testing implementatons, providing conconvenience but at the cost of in-depth testing procedures)
+
+	##Use case name:
+                Verify successful login through Google login
+
+	##Description:
+                Test the Google login button with navigation into the app's
+		main activity, and sign out from app's main activity back
+		to the login page.
 	
+	##Pre-conditions:
+		User has valid Google account. If not, the user is prompted
+		to create one.
+
+	##Test steps:
+		1. Click login button
+		2. Navigate to login page
+		3. Select existing account.
+		4. Navigate to app's main activity.
+		5. Click Signout button in app's menu overflow toolbar.
+	
+	##Expected result:
+		User should be able to navigate to app's main activity.
+		Upon signing out from app's main activity, user should
+		be navigated back to the login page.
+
+	##Actual result:
+		User is navigated to app's main activity. From the main
+		activity, user is navigated back to the login page after
+		signing out.
+	
+	##Status (Pass/Fail):
+		Pass
+
+	##Screenshot:
+	
+		N/A
+
+	##Post-conditions
+		User has successfully traversed through to the main activity
+		from the login activity and back.
+
+	##Screenshot:
+		Shows a successful completion of basic UI login/logout functionality
+		as an instrumated test. In other words, it tested under the conditions 
+		of android's Virtual Hardware Device platform.
+
+
