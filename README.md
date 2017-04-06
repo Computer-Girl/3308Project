@@ -1,5 +1,7 @@
 # 3308 Project
 
+## Please check TESTING.md in this testing branch for write-up
+
 ###Who: 
 
 Jasmine Rethmann (Computer-Girl) Lucas Dachman (LucasDachman) Nihar Nandan (niharnandan) Jonathan Taing (taingj) Ningtian Ruan (niru32868)
