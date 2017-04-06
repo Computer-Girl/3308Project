@@ -66,7 +66,7 @@
 	10. Screenshot:
 	
 		Shows that when ran through Android Studio's emulator, all tests passed for LoginUITest.java.
-		![logintestpass](https://cloud.githubusercontent.com/assets/25499591/24745327/88ed622a-1a72-11e7-8ad1-479ce4b8d14d.PNG)
+![logintestpass](https://cloud.githubusercontent.com/assets/25499591/24745327/88ed622a-1a72-11e7-8ad1-479ce4b8d14d.PNG)
 		
 	
 
@@ -111,7 +111,7 @@
 	
 	10. Screenshot:
 		Shows that when ran through Android Studio's emulator, all tests passed for EventViewActivityTest.java.
-		![eventviewactivitypass](https://cloud.githubusercontent.com/assets/25499591/24745348/a26360b0-1a72-11e7-9c39-b65e3cc2642f.PNG)
+![eventviewactivitypass](https://cloud.githubusercontent.com/assets/25499591/24745348/a26360b0-1a72-11e7-9c39-b65e3cc2642f.PNG)
 
 
 
