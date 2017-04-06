@@ -96,5 +96,5 @@
 
 
 
-3. <filename> (Test Google Sign-in API accessibility, navigation, and permissions for user) 
+3. <(put filename here)> (Test Google Sign-in API accessibility, navigation, and permissions for user) 
 	
