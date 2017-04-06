@@ -1,3 +1,6 @@
+****TESTING.md****
+
+
 #Who: Ningtian Ruan, Jasmine Rethmann, Lucas Dachman, Jonathan Taing, Nihar Nandan
 
 #Title: Let's Go
@@ -43,6 +46,11 @@
 		User is now setup with local database connection and able to
 		access app's features after testing the login UI and functionality. 
 	
+	##Screenshot:
+		Shows that when ran through Android Studio's emulator, all tests passed for LoginUITest.java.
+		![logintestpass](https://cloud.githubusercontent.com/assets/25499591/24745327/88ed622a-1a72-11e7-8ad1-479ce4b8d14d.PNG)
+		
+	
 
 2. EventViewActivityTest.java (Test functionality and navigation of EventView activity for user, along with UI)
 
@@ -81,6 +89,11 @@
 	##Post-conditions:
 		User now has access to all event information from database
 		and has correct permissions to view Google Maps.
+	
+	##Screenshot:
+		Shows that when ran through Android Studio's emulator, all tests passed for EventViewActivityTest.java.
+		![eventviewactivitypass](https://cloud.githubusercontent.com/assets/25499591/24745348/a26360b0-1a72-11e7-9c39-b65e3cc2642f.PNG)
+
 
 
 3. <filename> (Test Google Sign-in API accessibility, navigation, and permissions for user) 
