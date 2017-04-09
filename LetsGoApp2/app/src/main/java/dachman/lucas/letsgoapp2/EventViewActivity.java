@@ -15,8 +15,6 @@ import java.text.DateFormat;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
-
-
 import dachman.lucas.letsgoapp2.CreateDatabase;
 
 public class EventViewActivity extends AppCompatActivity {
