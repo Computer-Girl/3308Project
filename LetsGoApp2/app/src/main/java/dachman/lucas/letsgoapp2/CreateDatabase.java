@@ -1,6 +1,8 @@
 package dachman.lucas.letsgoapp2;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -42,14 +44,38 @@ public class CreateDatabase extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase database){
         database.execSQL(DATABASE_CREATE);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         Log.w(CreateDatabase.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
-                + newVersion);
+                        + newVersion);
         db.execSQL("DROP TABLE IF EXISTS" + TABLE_EVENTS);
         onCreate(db);
+    }
+
+    //ADDED**********
+
+    //star repo JR 4/8
+
+    public boolean UpdateDatabaseStar (String id)
+    {
+        SQLiteDatabase star_db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String Query = "Select * from " + TABLE_EVENTS + " where " + COLUMN_ID + " = " + id + "AND" + COLUMN_STAR + " = " + 0;
+        Cursor cursor = star_db.rawQuery(Query, null);
+        if(cursor.getCount() == 1){
+            values.put(COLUMN_STAR, id);
+            values.put(COLUMN_STAR, 1);
+            star_db.update(TABLE_EVENTS,values,"id = ?", new String[] {id});
+            cursor.close();
+            return true;
+        }
+
+        return false;
+
     }
 }
