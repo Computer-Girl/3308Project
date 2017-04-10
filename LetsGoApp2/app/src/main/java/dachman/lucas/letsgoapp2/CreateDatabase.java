@@ -64,7 +64,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
         SQLiteDatabase star_db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        String Query = "Select * from " + TABLE_EVENTS + " where " + COLUMN_ID + " = " + id + "AND" + COLUMN_STAR + " = " + 0;
+        String Query = "Select * from " + TABLE_EVENTS + " where " + COLUMN_ID + " = " + id + " AND " + COLUMN_STAR + " = " + 0;
         Cursor cursor = star_db.rawQuery(Query, null);
         if(cursor.getCount() == 1){
             values.put(COLUMN_STAR, id);

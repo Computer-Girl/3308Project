@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import dachman.lucas.letsgoapp2.EventGenerator;
 import dachman.lucas.letsgoapp2.Models.Category;
@@ -19,7 +18,7 @@ import dachman.lucas.letsgoapp2.Models.Event;
 import dachman.lucas.letsgoapp2.Adapters.EventListRecyclerAdapter;
 import dachman.lucas.letsgoapp2.R;
 
-public class EventListAllFragment extends Fragment {
+public class EventListCategoryFragment extends Fragment {
 
     private static final String ARG_PARAM1 = Category.NAME;
 
@@ -28,12 +27,12 @@ public class EventListAllFragment extends Fragment {
     private RecyclerView recyclerView;
     private EventListRecyclerAdapter adapter;
 
-    public EventListAllFragment() {
+    public EventListCategoryFragment() {
         // Required empty public constructor
     }
 
-    public static EventListAllFragment newInstance(Category cat) {
-        EventListAllFragment fragment = new EventListAllFragment();
+    public static EventListCategoryFragment newInstance(Category cat) {
+        EventListCategoryFragment fragment = new EventListCategoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, cat.name());
         fragment.setArguments(args);
