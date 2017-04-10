@@ -2,7 +2,6 @@
 
 ## Team Project Part 3 link to testing: https://github.com/Computer-Girl/3308Project/tree/testing
 
-
 ### Who: 
 
 Jasmine Rethmann (Computer-Girl) Lucas Dachman (LucasDachman) Nihar Nandan (niharnandan) Jonathan Taing (taingj) Ningtian Ruan (niru32868)

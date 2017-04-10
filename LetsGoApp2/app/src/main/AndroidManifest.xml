@@ -32,7 +32,7 @@
                 android:value="dachman.lucas.letsgoapp2.TabbedEventListActivity" />
         </activity>
         <activity android:name=".TabbedEventListActivity" />
-        <activity android:name=".Models.OpeningPage"></activity>
+        <activity android:name=".OpeningPage"></activity>
     </application>
 
 </manifest>
