@@ -21,14 +21,26 @@ import java.text.DateFormat;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
+import dachman.lucas.letsgoapp2.CreateDatabase;
+
 public class EventViewActivity extends AppCompatActivity {
 
     // Currently shown event
     Event currentEvent;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION =1;
 
+    //ADDED********
+    //database
+    CreateDatabase starDB;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //ADDED*************
+        starDB = new CreateDatabase (this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,19 +53,38 @@ public class EventViewActivity extends AppCompatActivity {
         populateViews();
     }
 
+    //star repo JR 4/8
     private void setUpStarButton() {
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.star_button);
 
         changeStarIcon(fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
+
+            //ADDED********
+
             public void onClick(View view) {
-                Snackbar.make(view, "Implement Star Feature", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                String ID = Integer.toString( currentEvent.getId());
+                //String ID = currentEvent.getId().toString(ID);
+
+                boolean starUpdate = starDB.UpdateDatabaseStar(ID);
+
+                if (starUpdate == true)
+                {
+                    boolean isStarred = currentEvent.isShowAsStarred();
+                    currentEvent.setShowAsStarred(!isStarred);
+                    changeStarIcon(fab);
+                    Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                }
+                //Snackbar.make(view, "Implement Star Feature", Snackbar.LENGTH_LONG)
+                 //       .setAction("Action", null).show();
                 // Make event starred/unstarred
-                boolean isStarred = currentEvent.isShowAsStarred();
-                currentEvent.setShowAsStarred(!isStarred);
-                changeStarIcon(fab);
+
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -1,5 +1,8 @@
 package dachman.lucas.letsgoapp2;
 
+import android.content.Context;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -15,7 +18,8 @@ import dachman.lucas.letsgoapp2.Models.Event;
 public class EventGenerator {
 
 
-    public static Event [] events;
+    public ArrayList<Event> events;
+    public static EventGenerator eventGenerator;
 
     // ID, Name, Location, OrganizerName, Category, Description, Date
     public static String [] eventInfo = {
@@ -29,24 +33,20 @@ public class EventGenerator {
             "Other Event, C4C, Jeff, OTHER, Help people learn about cool culture"
     };
 
+    private EventGenerator() {
+        events = new ArrayList<Event>();
+    }
 
-    public static Event [] getEvents() {
-        events = new Event[eventInfo.length];
-
-        for(int i = 0; i < events.length; i++) {
-            String eString = eventInfo[i];
-            String [] eArray = eString.split(", ");
-            Event e = new Event();
-            e.setId(i);
-            e.setName(eArray[0]);
-            e.setLocation(eArray[1]);
-            e.setOrganizerName(eArray[2]);
-            e.setCategory(Category.valueOf(eArray[3]));
-            e.setDescription(eArray[4]);
-            e.setDate(randomDate());
-            events[i] = e;
+    public static EventGenerator getInstance(Context context) {
+        if(eventGenerator == null) {
+            eventGenerator = new EventGenerator();
         }
+        return eventGenerator;
+    }
 
+    public ArrayList<Event> getEvents() {
+        // TODO: Populate arraylist here
+        parseEvents();
         return events;
     }
 
@@ -57,6 +57,23 @@ public class EventGenerator {
         Random r = new Random();
         long number = x+((long)(r.nextDouble()*(y-x)));
         return new Date(number);
+    }
+
+    public void parseEvents() {
+
+        for(int i = 0; i < eventInfo.length; i++) {
+            String eString = eventInfo[i];
+            String [] eArray = eString.split(", ");
+            Event e = new Event();
+            e.setId(i);
+            e.setName(eArray[0]);
+            e.setLocation(eArray[1]);
+            e.setOrganizerName(eArray[2]);
+            e.setCategory(Category.valueOf(eArray[3]));
+            e.setDescription(eArray[4]);
+            e.setDate(randomDate());
+            events.add(e);
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package dachman.lucas.letsgoapp2.Models;
+package dachman.lucas.letsgoapp2;
 /**
  * Created by Jasmine on 3/19/17.
  */
