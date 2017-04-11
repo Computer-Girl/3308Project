@@ -28,6 +28,18 @@ public class mFragmentPagerAdapter extends FragmentStatePagerAdapter {
         this.pages = _pages;
     }
 
+    /**
+     * This method takes care of showing the correct
+     * fragment depending on the tab view. If the tab
+     * view is one of the categories then it returns
+     * an instance of EventListCategoryFragment.
+     * The Category is determined using pageName. If
+     * the tab view is for the starred events then
+     * it returns an instance EventListStarredFragment
+     *
+     * @param position - The position of the tab view
+     * @return - The Fragment to display
+     */
     @Override
     public Fragment getItem(int position) {
         String pageName = pages[position];

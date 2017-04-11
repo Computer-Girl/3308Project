@@ -31,6 +31,11 @@ public class EventListCategoryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     *
+     * @param cat - The Category to filter
+     * @return - A new instance of this Fragment
+     */
     public static EventListCategoryFragment newInstance(Category cat) {
         EventListCategoryFragment fragment = new EventListCategoryFragment();
         Bundle args = new Bundle();
@@ -52,7 +57,13 @@ public class EventListCategoryFragment extends Fragment {
 
     }
 
-    // Add Arbitrary events for testing
+    /**
+     * Populates list with Event objects.
+     *
+     * @param list - the list to populate
+     * @param category - Category to filter out
+     * @param context
+     */
     public static void addEvents(ArrayList<Event> list, Category category, Context context) {
         // Populate arraylist to be given to Recycler adapter:
         EventGenerator eg = EventGenerator.getInstance(context);
