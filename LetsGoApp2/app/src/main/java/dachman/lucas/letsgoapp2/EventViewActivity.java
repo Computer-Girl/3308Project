@@ -20,11 +20,12 @@ import dachman.lucas.letsgoapp2.CreateDatabase;
 public class EventViewActivity extends AppCompatActivity {
 
     // Currently shown event
-    Event currentEvent;
 
+    Event currentEvent;
     //ADDED********
     //database
     CreateDatabase starDB;
+
 
 
 
@@ -48,6 +49,8 @@ public class EventViewActivity extends AppCompatActivity {
 
     //star repo JR 4/8
     private void setUpStarButton() {
+
+
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.star_button);
 
         changeStarIcon(fab);
@@ -59,11 +62,14 @@ public class EventViewActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String ID = Integer.toString( currentEvent.getId());
-                //String ID = currentEvent.getId().toString(ID);
 
-                boolean starUpdate = starDB.UpdateDatabaseStar(ID);
+                String Name= currentEvent.getName();
 
-                if (starUpdate == true)
+                //pass ID and name to udpate function in createdatabase
+                int starUpdate = starDB.UpdateDatabaseStar(ID, Name);
+
+                //check to see if anything updated
+                if (starUpdate != 0)
                 {
                     boolean isStarred = currentEvent.isShowAsStarred();
                     currentEvent.setShowAsStarred(!isStarred);
@@ -72,11 +78,10 @@ public class EventViewActivity extends AppCompatActivity {
                 }
                 else
                 {
+
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
                 }
-                //Snackbar.make(view, "Implement Star Feature", Snackbar.LENGTH_LONG)
-                 //       .setAction("Action", null).show();
-                // Make event starred/unstarred
+
 
             }
         });
@@ -122,3 +127,4 @@ public class EventViewActivity extends AppCompatActivity {
     }
 
 }
+
