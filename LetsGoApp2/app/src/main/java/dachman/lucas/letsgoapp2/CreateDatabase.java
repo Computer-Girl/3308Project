@@ -1,4 +1,4 @@
-package dachman.lucas.letsgoapp2;
+ackage dachman.lucas.letsgoapp2;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
+
 /**
  * Created by Jasmine on 4/3/2017.
  */
@@ -59,22 +61,20 @@ public class CreateDatabase extends SQLiteOpenHelper{
 
     //star repo JR 4/8
 
-    public boolean UpdateDatabaseStar (String id)
+
+    //put id where name is
+    public int UpdateDatabaseStar (String id,String name)
     {
         SQLiteDatabase star_db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        //Just testing with switching Name in db
+        //tried with COLUMN_STAR and gave it 1 and it didn't work either
+        values.put(COLUMN_NAME, "jasmine");
+        String[] whereArgs = {name};
+        int co = star_db.update(TABLE_EVENTS, values, COLUMN_NAME +"=?",whereArgs);
 
-        String Query = "Select * from " + TABLE_EVENTS + " where " + COLUMN_ID + " = " + id + "AND" + COLUMN_STAR + " = " + 0;
-        Cursor cursor = star_db.rawQuery(Query, null);
-        if(cursor.getCount() == 1){
-            values.put(COLUMN_STAR, id);
-            values.put(COLUMN_STAR, 1);
-            star_db.update(TABLE_EVENTS,values,"id = ?", new String[] {id});
-            cursor.close();
-            return true;
-        }
+        return co ;
 
-        return false;
 
     }
 }
