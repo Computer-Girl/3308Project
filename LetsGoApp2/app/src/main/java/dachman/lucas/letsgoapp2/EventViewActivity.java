@@ -27,7 +27,7 @@ public class EventViewActivity extends AppCompatActivity {
 
     // Currently shown event
     Event currentEvent;
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION =1;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION =1;
 
     //ADDED********
     //database
@@ -122,19 +122,17 @@ public class EventViewActivity extends AppCompatActivity {
         //Set Toolbar title to current event Name
         getSupportActionBar().setTitle(currentEvent.getName());
     }
-
+    //Start map activity or fragment
     public void onClickMap(View view) {
-        //TODO: Start map activity or fragment
         getPermission();
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if(ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
             Intent intent = new Intent(getApplicationContext(), MapActivity.class);
             intent.putExtra("Event", currentEvent);
             startActivity(intent);
+        }
 
     }
 
@@ -143,26 +141,9 @@ public class EventViewActivity extends AppCompatActivity {
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
         }
     }
 

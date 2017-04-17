@@ -658,8 +658,10 @@ public class MapActivity extends AppCompatActivity
     }
 
     public void showCurrentLocation(MenuItem item) {
-        Location currentLocation = LocationServices.FusedLocationApi
-                .getLastLocation(mLocationClient);
+        Location currentLocation = null;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            currentLocation = LocationServices.FusedLocationApi.getLastLocation(mLocationClient);
+        }
         if (currentLocation == null) {
             Toast.makeText(this, "Couldn't connect!", Toast.LENGTH_SHORT).show();
         } else {
@@ -694,20 +696,10 @@ public class MapActivity extends AppCompatActivity
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         request.setInterval(5000);
         request.setFastestInterval(1000);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mLocationClient, request, mListener
-            );
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mLocationClient, request, mListener);
             return;
         }
-
     }
 
     @Override
