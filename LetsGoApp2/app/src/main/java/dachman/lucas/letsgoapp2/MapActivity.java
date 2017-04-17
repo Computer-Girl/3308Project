@@ -15,13 +15,8 @@ import android.widget.Toast;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -38,10 +33,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import org.json.JSONArray;
@@ -57,9 +49,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.lang.Object;
-import java.lang.Throwable;
-import java.lang.Object;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
@@ -108,14 +97,14 @@ public class MapActivity extends AppCompatActivity
             }
 
         } else {
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_map_error);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_maps, menu);
         return true;
     }
 
