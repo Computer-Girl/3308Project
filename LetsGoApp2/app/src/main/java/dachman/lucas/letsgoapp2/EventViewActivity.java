@@ -1,10 +1,13 @@
 package dachman.lucas.letsgoapp2;
 
-import android.app.Activity;
+
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,12 +18,11 @@ import java.text.DateFormat;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
-import dachman.lucas.letsgoapp2.CreateDatabase;
-
 public class EventViewActivity extends AppCompatActivity {
 
     // Currently shown event
     Event currentEvent;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION =1;
 
     //ADDED********
     //database
@@ -115,10 +117,29 @@ public class EventViewActivity extends AppCompatActivity {
         //Set Toolbar title to current event Name
         getSupportActionBar().setTitle(currentEvent.getName());
     }
-
+    //Start map activity or fragment
     public void onClickMap(View view) {
-        //TODO: Start map activity or fragment
-        Toast.makeText(getApplicationContext(), "Maps not yet implemented", Toast.LENGTH_LONG).show();
+        getPermission();
+        if(ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+            intent.putExtra("Event", currentEvent);
+            startActivity(intent);
+        }
+
+    }
+
+    public void getPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+        }
     }
 
 }
