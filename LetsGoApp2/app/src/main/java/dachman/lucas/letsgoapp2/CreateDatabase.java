@@ -1,4 +1,4 @@
-ackage dachman.lucas.letsgoapp2;
+package dachman.lucas.letsgoapp2;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * Created by Jasmine on 4/3/2017.
+ * Created by Nihar on 4/3/2017.
  */
 
 public class CreateDatabase extends SQLiteOpenHelper{
@@ -35,8 +35,10 @@ public class CreateDatabase extends SQLiteOpenHelper{
             COLUMN_CATEGORY + " text , " +
             COLUMN_DESCRIPTION + " text , " +
             COLUMN_DATE + " text , " +
-            COLUMN_STAR + " integer , " +
-            COLUMN_LOCATION + "text );";
+            COLUMN_LOCATION + " text , " +
+            COLUMN_STAR + "integer );";
+
+    private static final String DATABASE_DELETE = "drop table" + TABLE_EVENTS ;
 
     public CreateDatabase(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,6 +46,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase database){
+        database.execSQL(DATABASE_DELETE);
         database.execSQL(DATABASE_CREATE);
 
     }

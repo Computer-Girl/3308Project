@@ -10,6 +10,12 @@ import java.util.concurrent.ThreadLocalRandom;
 import dachman.lucas.letsgoapp2.Models.Category;
 import dachman.lucas.letsgoapp2.Models.Event;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
 /**
  * Created by lucas on 3/8/17.
  * Badly written event generator class for testing
@@ -17,6 +23,18 @@ import dachman.lucas.letsgoapp2.Models.Event;
 
 public class EventGenerator {
 
+    private SQLiteDatabase database;
+    private CreateDatabase dbHelper;
+    private String[] allColumns = {
+            CreateDatabase.COLUMN_ID,
+            CreateDatabase.COLUMN_NAME,
+            CreateDatabase.COLUMN_ORGANIZER,
+            CreateDatabase.COLUMN_CATEGORY,
+            CreateDatabase.COLUMN_DESCRIPTION,
+            CreateDatabase.COLUMN_DATE,
+            //CreateDatabase.COLUMN_LOCATION,
+            CreateDatabase.COLUMN_STAR
+    };
 
     public ArrayList<Event> events;
     public static EventGenerator eventGenerator;
@@ -33,20 +51,86 @@ public class EventGenerator {
             "Other Event, C4C, Jeff, OTHER, Help people learn about cool culture"
     };
 
-    private EventGenerator() {
+    public EventGenerator(Context context) {
+        dbHelper = new CreateDatabase(context);
         events = new ArrayList<Event>();
     }
 
+    public void open() throws SQLException {
+        database = dbHelper.getWritableDatabase();
+    }
+
+    public void close() {
+        dbHelper.close();
+    }
+    //DO NOT USE YET
+    public Event createEvent(String [] Data) {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(CreateDatabase.COLUMN_NAME, Data[0]);
+        values.put(CreateDatabase.COLUMN_ORGANIZER, Data[2]);
+        values.put(CreateDatabase.COLUMN_CATEGORY, Data[3]);
+        values.put(CreateDatabase.COLUMN_DESCRIPTION, Data[4]);
+        values.put(CreateDatabase.COLUMN_DATE, "1/2/3");
+        //values.put(CreateDatabase.COLUMN_LOCATION, Data[1]);
+
+        long insertId = database.insert(CreateDatabase.TABLE_EVENTS, null,
+                values);
+        /*Cursor cursor = database.query(CreateDatabase.TABLE_EVENTS,
+                allColumns, CreateDatabase.COLUMN_ID + " = " + insertId, null,
+                null, null, null);
+        cursor.moveToFirst();
+        Event newEvent = cursorToEvent(cursor);
+        cursor.close();*/
+        Event newEvent = new Event();
+        return newEvent;
+    }
+
+    public void deleteEvent(Event event) {
+        long id = event.getId();
+        System.out.println("Comment deleted with id: " + id);
+        database.delete(CreateDatabase.TABLE_EVENTS, CreateDatabase.COLUMN_ID
+                + " = " + id, null);
+    }
+
+
     public static EventGenerator getInstance(Context context) {
         if(eventGenerator == null) {
-            eventGenerator = new EventGenerator();
+            eventGenerator = new EventGenerator(context);
         }
         return eventGenerator;
     }
 
     public ArrayList<Event> getEvents() {
-        // TODO: Populate arraylist here
+        //Event temp = createEvent(eventInfo[0].split(", "));
+        //deleteEvent(temp);
+        //temp = createEvent(eventInfo[0].split(", "));
+        Cursor cursor = database.query(CreateDatabase.TABLE_EVENTS,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Event event = cursorToEvent(cursor);
+            events.add(event);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        close();
         return events;
+    }
+
+    private Event cursorToEvent(Cursor cursor) {
+        Event event = new Event();
+        event.setId(cursor.getInt(0));
+        event.setName(cursor.getString(1));
+        event.setCategory(Category.valueOf("CAREER"));
+        event.setDate(randomDate());
+        event.setDescription(cursor.getString(4));
+        event.setLocation(cursor.getString((6)));
+        event.setOrganizerName(cursor.getString(2));
+        event.setShowAsStarred(false);
+        return event;
     }
 
     public static Date randomDate() {
