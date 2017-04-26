@@ -102,6 +102,7 @@ public class EventGenerator {
     }
 
     public ArrayList<Event> getEvents() {
+
         //Event temp = createEvent(eventInfo[0].split(", "));
         //deleteEvent(temp);
         //temp = createEvent(eventInfo[0].split(", "));
@@ -140,6 +141,23 @@ public class EventGenerator {
         Random r = new Random();
         long number = x+((long)(r.nextDouble()*(y-x)));
         return new Date(number);
+    }
+
+    public void parseEvents() {
+
+        for(int i = 0; i < eventInfo.length; i++) {
+            String eString = eventInfo[i];
+            String [] eArray = eString.split(", ");
+            Event e = new Event();
+            e.setId(i);
+            e.setName(eArray[0]);
+            e.setLocation(eArray[1]);
+            e.setOrganizerName(eArray[2]);
+            e.setCategory(Category.valueOf(eArray[3]));
+            e.setDescription(eArray[4]);
+            e.setDate(randomDate());
+            events.add(e);
+        }
     }
 
 }

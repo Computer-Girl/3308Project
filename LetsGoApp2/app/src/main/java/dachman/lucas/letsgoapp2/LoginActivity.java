@@ -199,6 +199,12 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mProgressDialog.dismiss();
+    }
+
     public void onClickTest(View v) {
         Intent intent = new Intent(getApplicationContext(), TabbedEventListActivity.class);
         startActivity(intent);
