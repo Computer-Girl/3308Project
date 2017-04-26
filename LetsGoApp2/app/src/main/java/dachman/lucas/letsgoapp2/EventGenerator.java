@@ -21,20 +21,21 @@ public class EventGenerator {
     public ArrayList<Event> events;
     public static EventGenerator eventGenerator;
 
-    // ID, Name, Location, OrganizerName, Category, Description, Date
+    // ID, Name, Location, OrganizerName, Category, Description, starred
     public static String [] eventInfo = {
-            "Career Fair, UMC, Lucas, CAREER, Find a Career",
-            "Some Event, UMC, Lucas, PUBLIC_SPEAKERS, Lucas will speak",
-            "Cool Event, Folsom Field, Bob, CULTURAL, This event will be fantastic",
-            "Meditation Session, Norlin Library, Allen, OTHER, A safe place to meditate",
-            "Jazz Ensemble lll & Thompson Latin Jazz Ensemble, Imig Music, CU Presents, ARTISTIC, Glen Miller: \"Here We Go Again\"",
-            "Some Sorority Event, UMC, Chelsea, GREEK, gonna help people and stuff",
-            "Cultural Event, C4C, Jeff, CULTURAL, Help people learn about cool culture",
-            "Other Event, C4C, Jeff, OTHER, Help people learn about cool culture"
+            "Career Fair, UMC, Lucas, CAREER, Find a Career, 1",
+            "Some Event, UMC, Lucas, PUBLIC_SPEAKERS, Lucas will speak, 1",
+            "Cool Event, Folsom Field, Bob, CULTURAL, This event will be fantastic, 0",
+            "Meditation Session, Norlin Library, Allen, OTHER, A safe place to meditate, 0",
+            "Jazz Ensemble lll & Thompson Latin Jazz Ensemble, Imig Music, CU Presents, ARTISTIC, Glen Miller: \"Here We Go Again\", 0",
+            "Some Sorority Event, UMC, Chelsea, GREEK, gonna help people and stuff, 0",
+            "Cultural Event, C4C, Jeff, CULTURAL, Help people learn about cool culture, 0",
+            "Other Event, C4C, Jeff, OTHER, Help people learn about cool culture, 0"
     };
 
     private EventGenerator() {
         events = new ArrayList<Event>();
+        parseEvents();
     }
 
     public static EventGenerator getInstance(Context context) {
@@ -46,7 +47,6 @@ public class EventGenerator {
 
     public ArrayList<Event> getEvents() {
         // TODO: Populate arraylist here
-        parseEvents();
         return events;
     }
 
@@ -72,6 +72,7 @@ public class EventGenerator {
             e.setCategory(Category.valueOf(eArray[3]));
             e.setDescription(eArray[4]);
             e.setDate(randomDate());
+            e.setStarred( (eArray[5].trim().equals("1")) ? true : false);
             events.add(e);
         }
     }

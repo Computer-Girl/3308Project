@@ -67,8 +67,8 @@ public class EventViewActivity extends AppCompatActivity {
 
                 if (starUpdate == true)
                 {
-                    boolean isStarred = currentEvent.isShowAsStarred();
-                    currentEvent.setShowAsStarred(!isStarred);
+                    boolean isStarred = currentEvent.isStarred();
+                    currentEvent.setStarred(!isStarred);
                     changeStarIcon(fab);
                     Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_LONG).show();
                 }
@@ -88,7 +88,7 @@ public class EventViewActivity extends AppCompatActivity {
 
     private void changeStarIcon(FloatingActionButton fab) {
 
-        boolean isStarred = currentEvent.isShowAsStarred();
+        boolean isStarred = currentEvent.isStarred();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (isStarred) {
                 fab.setImageDrawable(getDrawable(R.drawable.ic_star_gold_24dp));

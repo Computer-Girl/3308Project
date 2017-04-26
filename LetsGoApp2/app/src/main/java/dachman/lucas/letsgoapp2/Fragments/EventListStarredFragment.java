@@ -55,13 +55,13 @@ public class EventListStarredFragment extends Fragment {
 
     }
 
-    // Add Arbitrary events for testing
+
     public static void addEvents(ArrayList<Event> list, Context context) {
         // Populate arraylist to be given to Recycler adapter:
         EventGenerator eg = EventGenerator.getInstance(context);
         ArrayList<Event> tempEvents = eg.getEvents();
         for(Event e : tempEvents) {
-            if(e.isShowAsStarred()) {
+            if(e.isStarred()) {
                 Log.d("Starred:", e.getName());
                 list.add(e);
             }

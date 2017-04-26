@@ -66,14 +66,15 @@ public class EventListCategoryFragment extends Fragment {
      */
     public static void addEvents(ArrayList<Event> list, Category category, Context context) {
         // Populate arraylist to be given to Recycler adapter:
+
         EventGenerator eg = EventGenerator.getInstance(context);
         ArrayList<Event> tempEvents = eg.getEvents();
         for(Event e : tempEvents) {
             if(e.getCategory() == category) {
-                Log.d("Test", e.getName());
                 list.add(e);
             }
         }
+
     }
 
     @Override
