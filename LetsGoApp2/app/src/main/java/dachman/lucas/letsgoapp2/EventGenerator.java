@@ -10,6 +10,29 @@ import java.util.concurrent.ThreadLocalRandom;
 import dachman.lucas.letsgoapp2.Models.Category;
 import dachman.lucas.letsgoapp2.Models.Event;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by lucas on 3/8/17.
  * Badly written event generator class for testing
@@ -17,38 +40,124 @@ import dachman.lucas.letsgoapp2.Models.Event;
 
 public class EventGenerator {
 
+    private ProgressDialog pDialog;
+    private ListView lv;
+
+    private static String url = "http://letsgoapp2.herokuapp.com";
+
+    ArrayList<HashMap<String, String>> eventList;
+
+    private SQLiteDatabase database;
+    private CreateDatabase dbHelper;
+    private String[] allColumns = {
+            CreateDatabase.COLUMN_ID,
+            CreateDatabase.COLUMN_NAME,
+            CreateDatabase.COLUMN_ORGANIZER,
+            CreateDatabase.COLUMN_CATEGORY,
+            CreateDatabase.COLUMN_DESCRIPTION,
+            CreateDatabase.COLUMN_DATE,
+            //CreateDatabase.COLUMN_LOCATION,
+            CreateDatabase.COLUMN_STAR
+    };
 
     public ArrayList<Event> events;
     public static EventGenerator eventGenerator;
 
-    // ID, Name, Location, OrganizerName, Category, Description, starred
+    // ID, Name, Location, OrganizerName, Category, Description, Date
     public static String [] eventInfo = {
-            "Career Fair, UMC, Lucas, CAREER, Find a Career, 1",
-            "Some Event, UMC, Lucas, PUBLIC_SPEAKERS, Lucas will speak, 1",
-            "Cool Event, Folsom Field, Bob, CULTURAL, This event will be fantastic, 0",
-            "Meditation Session, Norlin Library, Allen, OTHER, A safe place to meditate, 0",
-            "Jazz Ensemble lll & Thompson Latin Jazz Ensemble, Imig Music, CU Presents, ARTISTIC, Glen Miller: \"Here We Go Again\", 0",
-            "Some Sorority Event, UMC, Chelsea, GREEK, gonna help people and stuff, 0",
-            "Cultural Event, C4C, Jeff, CULTURAL, Help people learn about cool culture, 0",
-            "Other Event, C4C, Jeff, OTHER, Help people learn about cool culture, 0"
+            "Career Fair, UMC, Lucas, CAREER, Find a Career",
+            "Some Event, UMC, Lucas, PUBLIC_SPEAKERS, Lucas will speak",
+            "Cool Event, Folsom Field, Bob, CULTURAL, This event will be fantastic",
+            "Meditation Session, Norlin Library, Allen, OTHER, A safe place to meditate",
+            "Jazz Ensemble lll & Thompson Latin Jazz Ensemble, Imig Music, CU Presents, ARTISTIC, Glen Miller: \"Here We Go Again\"",
+            "Some Sorority Event, UMC, Chelsea, GREEK, gonna help people and stuff",
+            "Cultural Event, C4C, Jeff, CULTURAL, Help people learn about cool culture",
+            "Other Event, C4C, Jeff, OTHER, Help people learn about cool culture"
     };
 
-    private EventGenerator() {
+    public EventGenerator(Context context) {
+        dbHelper = new CreateDatabase(context);
         events = new ArrayList<Event>();
-        parseEvents();
     }
+
+    public void open() throws SQLException {
+        database = dbHelper.getWritableDatabase();
+    }
+
+    public void close() {
+        dbHelper.close();
+    }
+    //DO NOT USE YET
+    public Event createEvent(String [] Data) {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(CreateDatabase.COLUMN_NAME, Data[0]);
+        values.put(CreateDatabase.COLUMN_ORGANIZER, Data[2]);
+        values.put(CreateDatabase.COLUMN_CATEGORY, Data[3]);
+        values.put(CreateDatabase.COLUMN_DESCRIPTION, Data[4]);
+        values.put(CreateDatabase.COLUMN_DATE, "1/2/3");
+        //values.put(CreateDatabase.COLUMN_LOCATION, Data[1]);
+
+        long insertId = database.insert(CreateDatabase.TABLE_EVENTS, null,
+                values);
+        /*Cursor cursor = database.query(CreateDatabase.TABLE_EVENTS,
+                allColumns, CreateDatabase.COLUMN_ID + " = " + insertId, null,
+                null, null, null);
+        cursor.moveToFirst();
+        Event newEvent = cursorToEvent(cursor);
+        cursor.close();*/
+        Event newEvent = new Event();
+        return newEvent;
+    }
+
+    public void deleteEvent(Event event) {
+        long id = event.getId();
+        System.out.println("Comment deleted with id: " + id);
+        database.delete(CreateDatabase.TABLE_EVENTS, CreateDatabase.COLUMN_ID
+                + " = " + id, null);
+    }
+
 
     public static EventGenerator getInstance(Context context) {
         if(eventGenerator == null) {
-            eventGenerator = new EventGenerator();
+            eventGenerator = new EventGenerator(context);
         }
         return eventGenerator;
     }
 
     public ArrayList<Event> getEvents() {
-        // TODO: Populate arraylist here
+        //Event temp = createEvent(eventInfo[0].split(", "));
+        //deleteEvent(temp);
+        //temp = createEvent(eventInfo[0].split(", "));
+        Cursor cursor = database.query(CreateDatabase.TABLE_EVENTS,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Event event = cursorToEvent(cursor);
+            events.add(event);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        close();
         return events;
     }
+
+    private Event cursorToEvent(Cursor cursor) {
+        Event event = new Event();
+        event.setId(cursor.getInt(0));
+        event.setName(cursor.getString(1));
+        event.setCategory(Category.valueOf("CAREER"));
+        event.setDate(randomDate());
+        event.setDescription(cursor.getString(4));
+        event.setLocation(cursor.getString((6)));
+        event.setOrganizerName(cursor.getString(2));
+        event.setShowAsStarred(false);
+        return event;
+    }
+
+
 
     public static Date randomDate() {
 
@@ -59,22 +168,72 @@ public class EventGenerator {
         return new Date(number);
     }
 
-    public void parseEvents() {
+    private class GetEvents extends AsyncTask<Void, Void, Void> {
 
-        for(int i = 0; i < eventInfo.length; i++) {
-            String eString = eventInfo[i];
-            String [] eArray = eString.split(", ");
-            Event e = new Event();
-            e.setId(i);
-            e.setName(eArray[0]);
-            e.setLocation(eArray[1]);
-            e.setOrganizerName(eArray[2]);
-            e.setCategory(Category.valueOf(eArray[3]));
-            e.setDescription(eArray[4]);
-            e.setDate(randomDate());
-            e.setStarred( (eArray[5].trim().equals("1")) ? true : false);
-            events.add(e);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            /*pDialog = new ProgressDialog(EventGenerator.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();*/
+
         }
-    }
 
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall(url);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    JSONArray events = jsonObj.getJSONArray("contacts");
+
+                    // looping through All Contacts
+                    for (int i = 0; i < events.length(); i++) {
+                        JSONObject c = events.getJSONObject(i);
+
+                        String category = c.getString("category");
+                        String date = c.getString("date");
+                        String description = c.getString("description");
+                        String id = c.getString("id");
+                        String location = c.getString("location");
+                        String name = c.getString("name");
+                        String organizer = c.getString("organizer");
+                        String star = c.getString("star");
+
+                        // tmp hash map for single contact
+                        HashMap<String, String> event = new HashMap<>();
+
+                        // adding each child node to HashMap key => value
+                        event.put("category", category);
+                        event.put("date", date);
+                        event.put("description", description);
+                        event.put("id", id);
+                        event.put("location", location);
+                        event.put("name", name);
+                        event.put("organizer", organizer);
+                        event.put("star", id);
+
+                        // adding contact to contact list
+                        eventList.add(event);
+                    }
+
+
+                } catch (final JSONException e) {
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+
+    }
 }

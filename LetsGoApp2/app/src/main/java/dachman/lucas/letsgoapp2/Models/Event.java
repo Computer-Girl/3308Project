@@ -29,7 +29,7 @@ public class Event implements Parcelable{
     private String description = "No Description";
     private int id;
     private Date date;
-    private boolean isStarred;
+    private boolean showAsStarred;
 
 
     public Event(int _id, String _name, String _location, Date _date) {
@@ -117,12 +117,12 @@ public class Event implements Parcelable{
         this.description = description;
     }
 
-    public boolean isStarred() {
-        return isStarred;
+    public boolean isShowAsStarred() {
+        return showAsStarred;
     }
 
-    public void setStarred(boolean starred) {
-        this.isStarred = starred;
+    public void setShowAsStarred(boolean showAsStarred) {
+        this.showAsStarred = showAsStarred;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class Event implements Parcelable{
         dest.writeString(this.description);
         dest.writeInt(this.id);
         dest.writeLong(this.date != null ? this.date.getTime() : -1);
-        dest.writeByte(this.isStarred ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.showAsStarred ? (byte) 1 : (byte) 0);
     }
 
     protected Event(Parcel in) {
@@ -152,7 +152,7 @@ public class Event implements Parcelable{
         this.id = in.readInt();
         long tmpDate = in.readLong();
         this.date = tmpDate == -1 ? null : new Date(tmpDate);
-        this.isStarred = in.readByte() != 0;
+        this.showAsStarred = in.readByte() != 0;
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {

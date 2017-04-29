@@ -1,13 +1,10 @@
 package dachman.lucas.letsgoapp2;
 
-
-import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,15 +15,17 @@ import java.text.DateFormat;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
+import dachman.lucas.letsgoapp2.CreateDatabase;
+
 public class EventViewActivity extends AppCompatActivity {
 
     // Currently shown event
-    Event currentEvent;
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION =1;
 
+    Event currentEvent;
     //ADDED********
     //database
     CreateDatabase starDB;
+
 
 
 
@@ -50,6 +49,8 @@ public class EventViewActivity extends AppCompatActivity {
 
     //star repo JR 4/8
     private void setUpStarButton() {
+
+
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.star_button);
 
         changeStarIcon(fab);
@@ -61,24 +62,26 @@ public class EventViewActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String ID = Integer.toString( currentEvent.getId());
-                //String ID = currentEvent.getId().toString(ID);
 
-                boolean starUpdate = starDB.UpdateDatabaseStar(ID);
+                String Name= currentEvent.getName();
 
-                if (starUpdate == true)
+                //pass ID and name to udpate function in createdatabase
+                int starUpdate = starDB.UpdateDatabaseStar(ID, Name);
+
+                //check to see if anything updated
+                if (starUpdate != 0)
                 {
-                    boolean isStarred = currentEvent.isStarred();
-                    currentEvent.setStarred(!isStarred);
+                    boolean isStarred = currentEvent.isShowAsStarred();
+                    currentEvent.setShowAsStarred(!isStarred);
                     changeStarIcon(fab);
                     Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
+
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
                 }
-                //Snackbar.make(view, "Implement Star Feature", Snackbar.LENGTH_LONG)
-                 //       .setAction("Action", null).show();
-                // Make event starred/unstarred
+
 
             }
         });
@@ -88,7 +91,7 @@ public class EventViewActivity extends AppCompatActivity {
 
     private void changeStarIcon(FloatingActionButton fab) {
 
-        boolean isStarred = currentEvent.isStarred();
+        boolean isStarred = currentEvent.isShowAsStarred();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (isStarred) {
                 fab.setImageDrawable(getDrawable(R.drawable.ic_star_gold_24dp));
@@ -117,29 +120,11 @@ public class EventViewActivity extends AppCompatActivity {
         //Set Toolbar title to current event Name
         getSupportActionBar().setTitle(currentEvent.getName());
     }
-    //Start map activity or fragment
+
     public void onClickMap(View view) {
-        getPermission();
-        if(ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-
-            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-            intent.putExtra("Event", currentEvent);
-            startActivity(intent);
-        }
-
-    }
-
-    public void getPermission() {
-        if (ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-        }
+        //TODO: Start map activity or fragment
+        Toast.makeText(getApplicationContext(), "Maps not yet implemented", Toast.LENGTH_LONG).show();
     }
 
 }
+

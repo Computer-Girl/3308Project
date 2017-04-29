@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dachman.lucas.letsgoapp2.Fragments.EventListCategoryFragment">
+    tools:context="dachman.lucas.letsgoapp2.Fragments.EventListAllFragment">
 
     <!-- TODO: Update blank fragment layout >
     <TextView

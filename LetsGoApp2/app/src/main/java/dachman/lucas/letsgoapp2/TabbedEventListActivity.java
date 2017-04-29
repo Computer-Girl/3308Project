@@ -28,18 +28,10 @@ public class TabbedEventListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_event_list);
 
-        // The array pages is a list of strings corresponding to each tab
-        Category [] categories = Category.values();
-        String [] pages = new String [categories.length+1];
-        pages[0] = "Starred";
-        for(int i = 1; i < pages.length; i++) {
-            pages[i] = categories[i-1].name();
-        }
-
         // Get the view pager and set its adapter
-
+        Category [] categories = Category.values();
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new mFragmentPagerAdapter(getSupportFragmentManager(), pages));
+        viewPager.setAdapter(new mFragmentPagerAdapter(getSupportFragmentManager(), categories));
 
         // Give Tab Layout the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
