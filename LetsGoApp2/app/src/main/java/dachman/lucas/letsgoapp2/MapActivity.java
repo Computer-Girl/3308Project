@@ -52,16 +52,20 @@ import java.util.List;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
+import static android.R.id.list;
+
 public class MapActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.OnConnectionFailedListener,LocationListener,
         OnMapReadyCallback {
-
+    double EventLocation_LAT=0,
+           EventLocation_LNG=0;
     private static final int ERROR_DIALOG_REQUEST = 9001;
     GoogleMap mMap;
     private static final double
             C4C_LAT = 40.004622,
-            C4C_LNG = -105.265003;
+            C4C_LNG = -105.265003,
+
 
     private GoogleApiClient mLocationClient;
     private LocationListener mListener;
@@ -71,34 +75,33 @@ public class MapActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Event currentEvent = getIntent().getParcelableExtra("Event");
-        locationstr = currentEvent.getLocation();
-        Toast.makeText(this, "Locatiom is: "+locationstr, Toast.LENGTH_SHORT).show();
+//        Event currentEvent = getIntent().getParcelableExtra("Event");
+//        locationstr = currentEvent.getLocation();
+//        Toast.makeText(this, "Locatiom is: "+locationstr, Toast.LENGTH_SHORT).show();
 
-
-
-        if (servicesOK()) {
+       if (servicesOK()) {
             setContentView(R.layout.activity_map);
-
-            if (initMap()) {
-                gotoLocation(C4C_LAT, C4C_LNG, 14);
+//            initMap();
+           if (initMap()) {
+                gotoLocation(C4C_LAT, C4C_LNG, 15);
 
                 mLocationClient = new GoogleApiClient.Builder(this)
                         .addApi(LocationServices.API)
-                        .addConnectionCallbacks(this)
-                        .addOnConnectionFailedListener(this)
+                       .addConnectionCallbacks(this)
+                       .addOnConnectionFailedListener(this)
                         .build();
 
-                mLocationClient.connect();
+               mLocationClient.connect();
 
-                //             mMap.setMyLocationEnabled(true);
-            } else {
-                Toast.makeText(this, "Map not connected!", Toast.LENGTH_SHORT).show();
-            }
+           }
+//           else {
+ //               Toast.makeText(this, "Map not connected!", Toast.LENGTH_SHORT).show();
+ //           }
 
         } else {
             setContentView(R.layout.activity_map_error);
         }
+        findEventLocation();
     }
 
     @Override
@@ -163,7 +166,6 @@ public class MapActivity extends AppCompatActivity
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -173,6 +175,7 @@ public class MapActivity extends AppCompatActivity
             mMap.setMyLocationEnabled(true);
             return;
         }
+        mMap.setMyLocationEnabled(true);
 
         mMap.setTrafficEnabled(true);
         //    mMap.setIndoorEnabled(true);
@@ -341,6 +344,27 @@ public class MapActivity extends AppCompatActivity
         }
 
     }
+    public void findEventLocation(){
+        Event currentEvent = getIntent().getParcelableExtra("Event");
+        locationstr = currentEvent.getLocation();
+        Geocoder gc = new Geocoder(this);
+        List<Address> list = null;
+
+        try {
+            list = gc.getFromLocationName(locationstr, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (list.size() > 0) {
+            Address add = list.get(0);
+            double lat = add.getLatitude();
+            double lng = add.getLongitude();
+            gotoLocation(lat, lng, 14);
+            EventLocation_LAT=lat;
+            EventLocation_LNG=lng;
+        }
+    }
 
     private String getUrl(LatLng origin, LatLng dest) {
 
@@ -404,6 +428,11 @@ public class MapActivity extends AppCompatActivity
             urlConnection.disconnect();
         }
         return data;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
     }
 
     // Fetches data from url passed
@@ -670,17 +699,21 @@ public class MapActivity extends AppCompatActivity
     @Override
     public void onConnected(Bundle bundle) {
         Toast.makeText(this, "Ready to map!", Toast.LENGTH_SHORT).show();
-
         mListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Toast.makeText(MapActivity.this, "Location changed: "
-                                + location.getLatitude() + ", " +
-                                location.getLongitude(),
-                        Toast.LENGTH_SHORT).show();
-                gotoLocation(location.getLatitude(), location.getLongitude(), 14);
+                Toast.makeText(MapActivity.this,
+                        "Location changed: " + location.getLatitude() + ", " +
+                                location.getLongitude(), Toast.LENGTH_SHORT).show();
+                gotoLocation(location.getLatitude(), location.getLongitude(), 15);
+                MarkerOptions options = new MarkerOptions()
+                        .title(add.getLocality())
+                        .position(new LatLng(lat, lng))
+                        .icon(BitmapDescriptorFactory.defaultMarker());
+                MapActivity.this.addMarker();
             }
         };
+
         LocationRequest request = LocationRequest.create();
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         request.setInterval(5000);
@@ -689,6 +722,10 @@ public class MapActivity extends AppCompatActivity
             LocationServices.FusedLocationApi.requestLocationUpdates(mLocationClient, request, mListener);
             return;
         }
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mLocationClient, request, mListener
+        );
+
     }
 
     @Override
