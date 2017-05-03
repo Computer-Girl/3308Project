@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "855705648225",
+    "project_id": "cu-campus-events"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855705648225:android:eb07bac9c68f7a3f",
+        "android_client_info": {
+          "package_name": "dachman.lucas.letsgoapp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855705648225-0s7ql19v8j5b9uiode4pcp5hid198iuh.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "855705648225-7jqag9tt8vc405c3k9v15m1nh2s9ded2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dachman.lucas.letsgoapp2",
+            "certificate_hash": "94e99f6eace2efea301a315f319ada1e4fade05e"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkDKMgFBBQ2iHnUzfWkiEZhHFKBw21ooc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
