@@ -15,8 +15,13 @@ import android.widget.Toast;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -33,7 +38,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import org.json.JSONArray;
@@ -49,6 +57,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.lang.Object;
+import java.lang.Throwable;
+import java.lang.Object;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
@@ -67,14 +78,16 @@ public class MapActivity extends AppCompatActivity
     private LocationListener mListener;
     private Marker marker1, marker2;
     private String locationstr;
+    Polyline line;
+    double CurrentLocation_LAT;
+    double CurrentLocation_LNG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Event currentEvent = getIntent().getParcelableExtra("Event");
         locationstr = currentEvent.getLocation();
-        Toast.makeText(this, "Locatiom is: "+locationstr, Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "Locatiom is: " + locationstr, Toast.LENGTH_SHORT).show();
 
 
         if (servicesOK()) {
@@ -82,6 +95,7 @@ public class MapActivity extends AppCompatActivity
 
             if (initMap()) {
                 gotoLocation(C4C_LAT, C4C_LNG, 14);
+//                showCurrentLocation();
 
                 mLocationClient = new GoogleApiClient.Builder(this)
                         .addApi(LocationServices.API)
@@ -91,10 +105,29 @@ public class MapActivity extends AppCompatActivity
 
                 mLocationClient.connect();
 
+                Geocoder gc = new Geocoder(this);
+                List<Address> list = null;
+                try {
+                    list = gc.getFromLocationName("CU boulder", 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (list.size() > 0) {
+                    Address add = list.get(0);
+                    double lat = add.getLatitude();
+                    double lng = add.getLongitude();
+                    gotoLocation(lat, lng, 14);
+
+                    addMarker(add, lat, lng);
+                    addMarker(add,CurrentLocation_LAT,CurrentLocation_LNG);
+                }
+
                 //             mMap.setMyLocationEnabled(true);
             } else {
-                Toast.makeText(this, "Map not connected!", Toast.LENGTH_SHORT).show();
+       //         Toast.makeText(this, "Map not connected!", Toast.LENGTH_SHORT).show();
             }
+
 
         } else {
             setContentView(R.layout.activity_map_error);
@@ -158,7 +191,7 @@ public class MapActivity extends AppCompatActivity
         setUpMap();
     }
 
-    public void setUpMap() {
+    public void setUpMap(){
 
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
@@ -170,14 +203,44 @@ public class MapActivity extends AppCompatActivity
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            mMap.setMyLocationEnabled(true);
+
             return;
         }
+        mMap.setMyLocationEnabled(true);
 
         mMap.setTrafficEnabled(true);
         //    mMap.setIndoorEnabled(true);
         mMap.setBuildingsEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        mLocationClient = new GoogleApiClient.Builder(this)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+
+        mLocationClient.connect();
+
+        Event currentEvent = getIntent().getParcelableExtra("Event");
+        locationstr = currentEvent.getLocation();
+        Geocoder gc = new Geocoder(this);
+        List<Address> list = null;
+        try {
+            list = gc.getFromLocationName("Boulder"+locationstr, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (list.size() > 0) {
+            Address add = list.get(0);
+            double lat = add.getLatitude();
+            double lng = add.getLongitude();
+            gotoLocation(lat, lng, 14);
+
+
+
+            addMarker(add, lat, lng);
+
+        }
     }
 
     private boolean initMap() {
@@ -311,21 +374,31 @@ public class MapActivity extends AppCompatActivity
 
     }
 
+
     private void addMarker(Address add, double lat, double lng) {
         MarkerOptions options = new MarkerOptions()
                 .title(add.getLocality())
                 .position(new LatLng(lat, lng))
                 .icon(BitmapDescriptorFactory.defaultMarker());
 //              .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
-        String country = add.getCountryName();
-        if (country.length() > 0) {
-            options.snippet(country);
-        }
+
 
         if (marker1 == null) {
             marker1 = mMap.addMarker(options);
         } else if (marker2 == null) {
             marker2 = mMap.addMarker(options);
+            String url = getUrl(marker2.getPosition(), marker1.getPosition());
+            Log.d("onMapClick", url.toString());
+            FetchUrl FetchUrl = new FetchUrl();
+
+            // Start downloading json data from Google Directions API
+            FetchUrl.execute(url);
+            //move map camera
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(marker2.getPosition()));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        } else {
+            removeEverything();
+            marker1 = mMap.addMarker(options);
             String url = getUrl(marker1.getPosition(), marker2.getPosition());
             Log.d("onMapClick", url.toString());
             FetchUrl FetchUrl = new FetchUrl();
@@ -335,9 +408,7 @@ public class MapActivity extends AppCompatActivity
             //move map camera
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker1.getPosition()));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-        } else {
-            removeEverything();
-            marker1 = mMap.addMarker(options);
+
         }
 
     }
@@ -491,8 +562,8 @@ public class MapActivity extends AppCompatActivity
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
-                lineOptions.width(10);
-                lineOptions.color(Color.RED);
+                lineOptions.width(13);
+                lineOptions.color(Color.BLUE);
 
                 Log.d("onPostExecute", "onPostExecute lineoptions decoded");
 
@@ -500,7 +571,7 @@ public class MapActivity extends AppCompatActivity
 
             // Drawing polyline in the Google Map for the i-th route
             if (lineOptions != null) {
-                mMap.addPolyline(lineOptions);
+                line=mMap.addPolyline(lineOptions);
             } else {
                 Log.d("onPostExecute", "without Polylines drawn");
             }
@@ -632,7 +703,7 @@ public class MapActivity extends AppCompatActivity
 
         // Drawing polyline in the Google Map for the i-th route
         if (lineOptions != null) {
-            mMap.addPolyline(lineOptions);
+            line = mMap.addPolyline(lineOptions);
         } else {
             Log.d("onPostExecute", "without Polylines drawn");
         }
@@ -641,23 +712,36 @@ public class MapActivity extends AppCompatActivity
 
     private void removeEverything() {
         marker1.remove();
-        marker1 = null;
-        marker2.remove();
-        marker2 = null;
+        marker1=null;
+        if(line!=null) {
+            line.remove();
+        }
     }
 
-    public void showCurrentLocation(MenuItem item) {
-        Location currentLocation = null;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            currentLocation = LocationServices.FusedLocationApi.getLastLocation(mLocationClient);
+    public void showCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+
         }
+        Location currentLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mLocationClient);
         if (currentLocation == null) {
             Toast.makeText(this, "Couldn't connect!", Toast.LENGTH_SHORT).show();
         } else {
             LatLng latLng = new LatLng(
                     currentLocation.getLatitude(),
                     currentLocation.getLongitude()
+
             );
+            CurrentLocation_LAT=currentLocation.getLatitude();
+            CurrentLocation_LNG=currentLocation.getLongitude();
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(
                     latLng, 14
             );
@@ -670,6 +754,26 @@ public class MapActivity extends AppCompatActivity
     @Override
     public void onConnected(Bundle bundle) {
         Toast.makeText(this, "Ready to map!", Toast.LENGTH_SHORT).show();
+        Location currentLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mLocationClient);
+        if(currentLocation==null){
+            Toast.makeText(this, "LocationClient is null", Toast.LENGTH_SHORT).show();
+        }else{
+        MarkerOptions options = new MarkerOptions()
+                    .title("Your location")
+                    .position(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()))
+                   .icon(BitmapDescriptorFactory.defaultMarker());
+           marker2 = mMap.addMarker(options);
+            String url = getUrl(marker2.getPosition(), marker1.getPosition());
+            Log.d("onMapClick", url.toString());
+            FetchUrl FetchUrl = new FetchUrl();
+
+            // Start downloading json data from Google Directions API
+            FetchUrl.execute(url);
+            //move map camera
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(marker2.getPosition()));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        }
 
         mListener = new LocationListener() {
             @Override
@@ -679,16 +783,27 @@ public class MapActivity extends AppCompatActivity
                                 location.getLongitude(),
                         Toast.LENGTH_SHORT).show();
                 gotoLocation(location.getLatitude(), location.getLongitude(), 14);
+
             }
         };
         LocationRequest request = LocationRequest.create();
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         request.setInterval(5000);
         request.setFastestInterval(1000);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mLocationClient, request, mListener);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mLocationClient, request, mListener
+            );
             return;
         }
+
     }
 
     @Override
