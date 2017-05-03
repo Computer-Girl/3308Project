@@ -23,6 +23,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_STAR = "star";
     public static final String COLUMN_LOCATION = "location";
+    public static final String COLUMN_TEMP = "temp" ;
 
     private static final String DATABASE_NAME = "events.db";
     private static final int DATABASE_VERSION = 1;
@@ -36,7 +37,8 @@ public class CreateDatabase extends SQLiteOpenHelper{
             COLUMN_DESCRIPTION + " text , " +
             COLUMN_DATE + " text , " +
             COLUMN_LOCATION + " text , " +
-            COLUMN_STAR + "integer );";
+            COLUMN_STAR + "integer , " +
+            COLUMN_TEMP + " text );";
 
     private static final String DATABASE_DELETE = "drop table" + TABLE_EVENTS ;
 
@@ -46,7 +48,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase database){
-        database.execSQL(DATABASE_DELETE);
+        //database.execSQL(DATABASE_DELETE);
         database.execSQL(DATABASE_CREATE);
 
     }

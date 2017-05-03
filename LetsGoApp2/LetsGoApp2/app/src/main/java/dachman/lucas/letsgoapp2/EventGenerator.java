@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -56,8 +57,8 @@ public class EventGenerator {
             CreateDatabase.COLUMN_CATEGORY,
             CreateDatabase.COLUMN_DESCRIPTION,
             CreateDatabase.COLUMN_DATE,
-            //CreateDatabase.COLUMN_LOCATION,
-            CreateDatabase.COLUMN_STAR
+            CreateDatabase.COLUMN_LOCATION,
+            //CreateDatabase.COLUMN_STAR
     };
 
     public ArrayList<Event> events;
@@ -76,8 +77,9 @@ public class EventGenerator {
     };
 
     public EventGenerator(Context context) {
+        Log.d("EventGenerator2","test");
         dbHelper = new CreateDatabase(context);
-	   new GetEvents().execute();
+        new GetEvents().execute();
         events = new ArrayList<Event>();
     }
 
@@ -97,7 +99,7 @@ public class EventGenerator {
         values.put(CreateDatabase.COLUMN_CATEGORY, Data[3]);
         values.put(CreateDatabase.COLUMN_DESCRIPTION, Data[4]);
         values.put(CreateDatabase.COLUMN_DATE, "1/2/3");
-        //values.put(CreateDatabase.COLUMN_LOCATION, Data[1]);
+        values.put(CreateDatabase.COLUMN_LOCATION, Data[1]);
 
         long insertId = database.insert(CreateDatabase.TABLE_EVENTS, null,
                 values);
@@ -123,7 +125,7 @@ public class EventGenerator {
     }
 
     public ArrayList<Event> getEvents() {
-        
+
         //Event temp = createEvent(eventInfo[1].split(", "));
         //deleteEvent(temp);
         //temp = createEvent(eventInfo[0].split(", "));
@@ -134,11 +136,15 @@ public class EventGenerator {
             return events;
 
         cursor.moveToFirst();
-
+        //List<String> temp = new ArrayList<String>();
+        //temp.add("TEST");
         while (!cursor.isAfterLast()) {
+            //if (temp.contains(event.getName()) == false) {
             Event event = cursorToEvent(cursor);
-            events.add(event);
-            cursor.moveToNext();
+                events.add(event);
+                cursor.moveToNext();
+                //temp.add(event.getName());
+            //}
         }
         // make sure to close the cursor
         cursor.close();
@@ -153,7 +159,6 @@ public class EventGenerator {
         event.setCategory(Category.valueOf(cursor.getString(3)));
         event.setDate(randomDate());
         event.setDescription(cursor.getString(4));
-        //event.setLocation(cursor.getString((7)));
         event.setOrganizerName(cursor.getString(2));
         event.setShowAsStarred(false);
         return event;
@@ -189,7 +194,7 @@ public class EventGenerator {
 
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url);
-
+            Log.d("EventGenerator1","TEST");
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -201,7 +206,7 @@ public class EventGenerator {
                     for (int i = 0; i < events.length(); i++) {
                         JSONObject c = events.getJSONObject(i);
 
-                        String category = "category";
+                        String category = c.getString("category");
                         String date = c.getString("date");
                         String description = c.getString("description");
                         String id = c.getString("id");
@@ -209,8 +214,8 @@ public class EventGenerator {
                         String name = c.getString("name");
                         String organizer = c.getString("organizer");
                         String star = c.getString("star");
-                        System.out.println("Comment deleted with id: " + id);
                         String event[] = {name,location,organizer,category,description};
+
                         Event temp = createEvent(event);
                     }
 
