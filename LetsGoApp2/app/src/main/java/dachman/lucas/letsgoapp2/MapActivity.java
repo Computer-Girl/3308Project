@@ -225,10 +225,12 @@ public class MapActivity extends AppCompatActivity
         Geocoder gc = new Geocoder(this);
         List<Address> list = null;
         try {
-            list = gc.getFromLocationName("Boulder"+locationstr, 1);
+            list = gc.getFromLocationName("Boulder ", 1);
         } catch (IOException e) {
             e.printStackTrace();
+            list = new ArrayList<Address>();
         }
+
 
         if (list.size() > 0) {
             Address add = list.get(0);

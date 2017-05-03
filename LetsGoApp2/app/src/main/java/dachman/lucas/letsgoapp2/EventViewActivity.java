@@ -63,9 +63,9 @@ public class EventViewActivity extends AppCompatActivity {
                 String ID = Integer.toString( currentEvent.getId());
                 //String ID = currentEvent.getId().toString(ID);
 
-                boolean starUpdate = starDB.UpdateDatabaseStar(ID);
+                int starUpdate = starDB.UpdateDatabaseStar(ID, currentEvent.getName());
 
-                if (starUpdate == true)
+                if (starUpdate == 1)
                 {
                     boolean isStarred = currentEvent.isStarred();
                     currentEvent.setStarred(!isStarred);
