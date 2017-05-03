@@ -1,0 +1,22 @@
+# Lucas Dachman
+# Let's Go App UI / Functionality Ideas
+
+-Main page with list of campus events.
+	- Each list item is clickable - give more info on events,
+		link to map, link to invite friends, button to add
+		event to favorites.
+
+-Favorites page
+	- Also a list activity - similar to main page but only shows favs
+
+-Lists views can be sorted and filtered.
+
+-login page
+	-use colorado.edu email to login.
+	-users must be authenticated (only CU students can use app?)
+
+-Event Reminders
+	-Push notifications
+	-Email notifications?
+	-Add favorite events to google calendar or android native calendar
+
