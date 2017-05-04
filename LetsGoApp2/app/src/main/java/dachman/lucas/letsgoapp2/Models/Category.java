@@ -4,6 +4,13 @@ package dachman.lucas.letsgoapp2.Models;
  * Created by lucas on 3/8/17.
  */
 
+/**
+ * @version 1
+ * class that creates the different categories for the events
+ *
+ */
+
+
 public enum Category {
 
     CAREER("Career"),                        // Career Events
