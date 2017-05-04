@@ -23,6 +23,11 @@ public class TabbedEventListActivity extends AppCompatActivity {
     private GoogleApiClient mGoogleApiClient;
 
 
+    /**
+     * function onCreate
+     * @param savedInstanceState
+     * sets content views, categories for events, and viewpager
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +57,12 @@ public class TabbedEventListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    // Menu icons are inflated just as they were with actionbar
+    /**
+     * function onCreateOptionsMenu
+     * @param menu
+     * @return boolean
+     * Menu icons are inflated just as they were with actionbar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -60,6 +70,10 @@ public class TabbedEventListActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * function onStart
+     * intializes db with Google sign in API
+     */
     @Override
     protected void onStart() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -72,6 +86,12 @@ public class TabbedEventListActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    /**
+     * function onOptionsItemSelected
+     * @param item
+     * @return booelan
+     * allows user to logout top right corner button
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -84,6 +104,10 @@ public class TabbedEventListActivity extends AppCompatActivity {
     }
 
     // [START signOut]
+    /**
+     *
+     * starts the sign out process thru google sing in API
+     */
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
