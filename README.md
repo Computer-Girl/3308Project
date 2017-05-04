@@ -1,6 +1,61 @@
-# 3308 Project
+# Graders: Please read!!
 
-## Team Project Part 3 link to testing: https://github.com/Computer-Girl/3308Project/tree/testing
+## Organization of Repository:
+The only branch you'll want to look at for our project to grade is this branch, the master. We have tagged this branch as "Final Submission".  Everything you'll need will be here, such as: 
+
+    Source code
+    Test cases
+    Auto-documenter documents
+    Project Part 6 PDF
+
+## To find Source Code:
+### Java code
+Click LetsGoApp2 -> app -> src -> main -> java/dachman/lucas/letsgoapp2
+
+In java/dachman/lucas/letsgoapp2 you will see several .java files, some found in the three folders: fragments, adapters, and models.
+
+### XML files
+
+#### Android Manifest file
+In main you will find the AndroidManifest.xml file:
+
+Click LetsGoApp2 -> app -> src -> main
+
+#### Other XML files
+In the values/layout folder you will find other important XML files:
+
+Click LetsGoApp2 -> app -> src -> main -> res -> values/layout
+
+## To find test cases:
+These should be found under the master branch, no need to search through folders.
+
+The test cases you should look for are: 
+
+    LoginUITest.java
+    EventViewActivity.java
+    LoginActivityTest.java
+    
+## To find Auto-Documenter documents:
+These should also just be under the master branch, no need to search through folders.
+
+The auto-documenter documents you should look for all end in .pdf, each .java file has one, including the test cases.
+
+#### Please ignore the HTML files. Javadoc outputs in HTML, but Github only shows the raw HTML code. Refer to the files with extensions .pdf, those are the auto-documenter documents (besides LetsGo_Part_5.pdf and LetsGo_Part_6.pdf)
+
+## To find the Team Project Part 6 PDF write-up:
+It should be called LetsGo_Part_6.pdf, and it is under this master branch. No need to search through folders.
+
+## How to test code:
+You would have to install the framework Android Studio to run our code. Installing Android Studio's latest version, along with the necessary APKs for the Android emulator to run and test the code. You would also need to install an API level, at the very minimum, of lollipop or above. This is the link you could go to start the process: https://developer.android.com/studio/index.html.  When you enter Android Studio, you can choose to pull a project from VCS control.  You'll click this and then pull our project code from Github using this link : https://github.com/Computer-Girl/3308Project.git.  In order for this to work, you would need Git installed on your machine as well. 
+
+## Thank you for reading! This is the end of the instructions. Below material is from Part 1 of this project, so please ignore. If you can't find something or have questions please e-mail me at jare8779@colorado.edu
+##
+##
+##
+##
+##
+##
+# Team Project Part 1: 3308 Project
 
 ### Who: 
 
