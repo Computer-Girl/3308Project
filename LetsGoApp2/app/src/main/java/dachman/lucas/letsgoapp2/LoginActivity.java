@@ -24,6 +24,11 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+
+/**
+* created by Jonathan
+* Google sign-in API activity
+*/
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
@@ -35,7 +40,11 @@ public class LoginActivity extends AppCompatActivity implements
     private TextView mStatusTextView;                               // JLT
     private ProgressDialog mProgressDialog;
 
-
+   /**
+     *
+     * @param savedInstanceState
+     * initializes and create the login activity through Google sign in  API
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +81,14 @@ public class LoginActivity extends AppCompatActivity implements
         // [END customize_button]
     }
 
-    // Optional
+    /**
+     *
+     * If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+     * and the GoogleSignInResult will be available instantly.
+     *  If the user has not previously signed in on this device or the sign-in has expired,
+     *  this asynchronous branch will attempt to sign in the user silently.  Cross-device
+     *  single sign-on will occur in this branch.
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -100,6 +116,13 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     // [START onActivityResult]
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     * Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -111,6 +134,12 @@ public class LoginActivity extends AppCompatActivity implements
     // [END onActivityResult]
 
     // [START handleSignInResult]
+   /**
+     *
+     * @param result
+     * handles sign in infromation
+     * Signed in successfully, show authenticated UI.
+     */
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -149,6 +178,12 @@ public class LoginActivity extends AppCompatActivity implements
     }
     // [END signOut]*/
 
+    /**
+     *
+     * @param connectionResult
+     * An unresolvable error has occurred and Google APIs (including Sign-In) will not
+     * be available.
+     */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
@@ -170,6 +205,11 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     // Optional
+   /**
+     *
+     * lets the sign in process be verbose,
+     * shows loading. . optional to use
+     */
     private void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -181,12 +221,24 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     // Optional
+    /**
+     *
+     * opposite of the function above, will
+     * hide progress of sign in and optional
+     */
     private void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
         }
     }
 
+    /**
+     *
+     * @param v
+     * this gives functionality for the sign in buttom
+     * once user clicks it should take to app
+     * not using for final though, using Google sign in
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -205,6 +257,10 @@ public class LoginActivity extends AppCompatActivity implements
         mProgressDialog.dismiss();
     }*/
 
+    /**
+     * Not used for final product, testing buttom
+     * @param v
+     */
     public void onClickTest(View v) {
         Intent intent = new Intent(getApplicationContext(), TabbedEventListActivity.class);
         startActivity(intent);
