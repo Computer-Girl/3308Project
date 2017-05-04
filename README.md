@@ -1,11 +1,19 @@
 # Graders: Please read!!
 
+## Please refer to Team Project Part 6 PDF Write-up:
+It should be called LetsGo_Part_6.pdf, and it is under this master branch. No need to search through folders.
+
+## What is this project about?:
+We wanted to create an app that would help college students here at CU find things to do and participate in.  Keeping that in 
+mind, our app listed events based on category that students can find on campus, such as a theater production or maybe a sporting event.  The user has to signin with their Google account because we used a Google signin API.  Once they login, the user will click on the type of event they'd be interested in, then they'd click on a specific event.  This will pull up specific information like the location, date, time, etc. We also have a feature where the user can click on a button that will take them to Google Maps if they need help finding where the event is taking place.  In the bottom right corner we give the user the option to star an event if they're interested in going to it. This will pull the information about the event and throw it under the "starred" event category so that it is easier to find the next time the user logs into the app.
+
 ## Organization of Repository:
 The only branch you'll want to look at for our project to grade is this branch, the master. We have tagged this branch as "Final Submission".  Everything you'll need will be here, such as: 
 
     Source code
     Test cases
     Auto-documenter documents
+    Project Part 5 presentation slides
     Project Part 6 PDF
 
 ## To find Source Code:
@@ -42,8 +50,8 @@ The auto-documenter documents you should look for all end in .pdf, each .java fi
 
 #### Please ignore the HTML files. Javadoc outputs in HTML, but Github only shows the raw HTML code. Refer to the files with extensions .pdf, those are the auto-documenter documents (besides LetsGo_Part_5.pdf and LetsGo_Part_6.pdf)
 
-## To find the Team Project Part 6 PDF write-up:
-It should be called LetsGo_Part_6.pdf, and it is under this master branch. No need to search through folders.
+## To find the Team Project Part 5 presentation slides:
+It should be called LetsGo_Part_5.pptx and LetsGo_Part_5.pdf (saved as .pptx & .pdf), and it is under this master branch. No need to search through folders. 
 
 ## How to test code:
 You would have to install the framework Android Studio to run our code. Installing Android Studio's latest version, along with the necessary APKs for the Android emulator to run and test the code. You would also need to install an API level, at the very minimum, of lollipop or above. This is the link you could go to start the process: https://developer.android.com/studio/index.html.  When you enter Android Studio, you can choose to pull a project from VCS control.  You'll click this and then pull our project code from Github using this link : https://github.com/Computer-Girl/3308Project.git.  In order for this to work, you would need Git installed on your machine as well. 
