@@ -37,6 +37,7 @@ import java.util.HashMap;
 /**
  * Created by lucas on 3/8/17.
  * Badly written event generator class for testing
+ * this is where the events get fetched from database
  */
 
 public class EventGenerator {
@@ -76,6 +77,11 @@ public class EventGenerator {
             "Other Event, C4C, Jeff, OTHER, Help people learn about cool culture"
     };
 
+    /**
+     *
+     * @param context
+     * creates Database and new array list of events
+     */
     public EventGenerator(Context context) {
         Log.d("EventGenerator2","test");
         dbHelper = new CreateDatabase(context);
@@ -107,6 +113,11 @@ public class EventGenerator {
         close();
     }
 
+    /**
+     *
+     * @throws SQLException
+     * gets writable database
+     */
     public void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
     }
@@ -115,6 +126,12 @@ public class EventGenerator {
         dbHelper.close();
     }
     //DO NOT USE YET
+    /**
+     *
+     * @param Data
+     * @return Event
+     * puts values for event into database upon login
+     */
     public Event createEvent(String [] Data) {
         open();
         ContentValues values = new ContentValues();
@@ -132,7 +149,11 @@ public class EventGenerator {
         close();
         return newEvent;
     }
-
+    /**
+     *
+     * @param event
+     * used to delete event if necessary
+     */
     public void deleteEvent(Event event) {
         long id = event.getId();
         System.out.println("Comment deleted with id: " + id);
@@ -140,7 +161,11 @@ public class EventGenerator {
                 + " = " + id, null);
     }
 
-
+    /**
+     *
+     * @param context
+     * @return eventGenerator
+     */
     public static EventGenerator getInstance(Context context) {
         if(eventGenerator == null) {
             eventGenerator = new EventGenerator(context);
@@ -148,12 +173,23 @@ public class EventGenerator {
         return eventGenerator;
     }
 
+    /**
+     *
+     * @return event
+     * goes through and fethces all events for eventview activity
+     */
     public ArrayList<Event> getEvents() {
 
 
         return events;
     }
 
+    /**
+    * @param cursor
+    * @return Event
+    * used to access events from database to set information about
+    * event for textview for user
+    */
     private Event cursorToEvent(Cursor cursor) {
         Event event = new Event();
         event.setId(cursor.getInt(0));
@@ -167,7 +203,10 @@ public class EventGenerator {
     }
 
 
-
+    /**
+     * random date generator not used for final product
+     * @return static date
+     */
     public static Date randomDate() {
 
         long x = 1483236400L;
