@@ -44,6 +44,11 @@ public class EventListCategoryFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * creates an instance of this fragment alon gwith
+     * new array list and adds evetns to context
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +82,13 @@ public class EventListCategoryFragment extends Fragment {
 
     }
 
+    /**
+     * inflates views for activity
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
