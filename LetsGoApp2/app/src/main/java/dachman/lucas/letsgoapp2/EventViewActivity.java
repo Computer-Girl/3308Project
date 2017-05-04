@@ -29,7 +29,13 @@ public class EventViewActivity extends AppCompatActivity {
     CreateDatabase starDB;
 
 
-
+    
+    /**
+     *
+     * @param savedInstanceState
+     * this set the content view, set intent, and calls popualte views
+     * to haev ths even view activity work for the user
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,7 +54,13 @@ public class EventViewActivity extends AppCompatActivity {
         populateViews();
     }
 
-    //star repo JR 4/8
+    /**
+     * @author jasmine
+     * created by Jasmine
+     * this gives functionality to the star button
+     * access database to change binary field if user
+     * wants to star the event, uses onClick method for this
+     */
     private void setUpStarButton() {
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.star_button);
 
@@ -86,6 +98,12 @@ public class EventViewActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param fab
+     * this function is what changes the star button once the user clicks it
+     * it will go from a gold star not filled in to a filled in gold star FAB
+     */
     private void changeStarIcon(FloatingActionButton fab) {
 
         boolean isStarred = currentEvent.isStarred();
@@ -98,6 +116,11 @@ public class EventViewActivity extends AppCompatActivity {
             }
         }
     }
+    /**
+     *
+     * utilizes textview to display even tinformation for the user
+     * then sets the text
+     */
     private void populateViews() {
 
         TextView date = (TextView) findViewById(R.id.event_view_date);
@@ -117,7 +140,13 @@ public class EventViewActivity extends AppCompatActivity {
         //Set Toolbar title to current event Name
         getSupportActionBar().setTitle(currentEvent.getName());
     }
-    //Start map activity or fragment
+    /**
+     *
+     * @param view
+     * creates functionality for the MAPS button for an event
+     * starts fragment for MAPs activity
+     */
+
     public void onClickMap(View view) {
         getPermission();
         if(ContextCompat.checkSelfPermission(this,
@@ -130,7 +159,7 @@ public class EventViewActivity extends AppCompatActivity {
         }
 
     }
-
+    
     public void getPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
