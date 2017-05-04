@@ -36,14 +36,28 @@ public class EventListStarredFragment extends Fragment {
     private RecyclerView recyclerView;
     private EventListRecyclerAdapter adapter;
 
+    /**
+     * Required empty public constructor
+     * @version 1
+     */
     public EventListStarredFragment() {
         // Required empty public constructor
     }
+    
+    /**
+     * creates new instance for starred fragment
+     * @return fragment
+     */
 
     public static EventListStarredFragment newInstance() {
         EventListStarredFragment fragment = new EventListStarredFragment();
         return fragment;
     }
+    
+    /**
+     * creates new array list and adds events to context
+     * @param savedInstanceState
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +82,13 @@ public class EventListStarredFragment extends Fragment {
         }
     }
 
+    /**
+     * inflates views for starred category of events
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return View
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
