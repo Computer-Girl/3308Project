@@ -18,6 +18,11 @@ import java.util.Date;
  *      correctly.
  */
 
+
+/**
+ * @version 1
+ * class that creates events for app
+ */
 public class Event implements Parcelable{
 
     // Category Constants
@@ -32,6 +37,13 @@ public class Event implements Parcelable{
     private boolean isStarred;
 
 
+    /**
+     * @param _id
+     * @param _name
+     * @param _location
+     * @param _date
+     * creates info for each event
+     */
     public Event(int _id, String _name, String _location, Date _date) {
         id = _id;
         name = _name;
@@ -39,6 +51,10 @@ public class Event implements Parcelable{
         date = _date;
     }
 
+    /**
+     * constructor for event class
+     * @version 1
+     */
     public Event() {
         id = -1;
         name = "Event Name";
@@ -49,58 +65,114 @@ public class Event implements Parcelable{
 
     /***** Getters and Setters ****/
 
+    /**
+     *  getter for name
+     * @return string
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * setter for name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * getter for lcoation
+     * @return string
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * setter for location
+     * @param location
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * getter for ID
+     * @return int
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * setter for ID for event
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * getter for date
+     * @return Date
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * setter for date
+     * @param date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * gets name
+     * @return string
+     */
     public String getOrganizerName() {
         return organizerName;
     }
 
+    /**
+     * sets name(s)
+     * @param organizerName
+     */
     public void setOrganizerName(String organizerName) {
         this.organizerName = organizerName;
     }
 
+    /**
+     * gets category
+     * @return Category
+     */
     public Category getCategory() {
         return category;
     }
 
+    /**
+     * sets categrory
+     * @param category
+     */
     public void setCategory(Category category) {
         this.category = category;
     }
 
+    /**
+     * gets description
+     * @return string
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * gets description for event
+     * @return string
+     */
     public String getDescriptionShort() {
         String s;
         try {
@@ -130,6 +202,11 @@ public class Event implements Parcelable{
         return 0;
     }
 
+    /**
+     * write to string for parcel for event class
+     * @param dest
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
@@ -142,6 +219,10 @@ public class Event implements Parcelable{
         dest.writeByte(this.isStarred ? (byte) 1 : (byte) 0);
     }
 
+    /**
+     * fills in even tinformation with matching event from db
+     * @param in
+     */
     protected Event(Parcel in) {
         this.name = in.readString();
         this.location = in.readString();
@@ -155,6 +236,10 @@ public class Event implements Parcelable{
         this.isStarred = in.readByte() != 0;
     }
 
+    /**
+     * @version 1
+     * creates event to inflate views for app
+     */
     public static final Creator<Event> CREATOR = new Creator<Event>() {
         @Override
         public Event createFromParcel(Parcel source) {
