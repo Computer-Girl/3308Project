@@ -63,6 +63,11 @@ import java.lang.Object;
 
 import dachman.lucas.letsgoapp2.Models.Event;
 
+/**
+ * Created by Ningtian
+ * Google API maps activity
+ */
+
 public class MapActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -82,6 +87,11 @@ public class MapActivity extends AppCompatActivity
     double CurrentLocation_LAT;
     double CurrentLocation_LNG;
 
+   /**
+     *
+     * @param savedInstanceState
+     * creates instance of the MAP activity, gets intent and location
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +144,12 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
+    /**
+     *  onCreateOptionsMenu
+     * @param menu
+     * @return
+     * inflates the menu for the maps activity
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -141,6 +157,12 @@ public class MapActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * onOptionsItemSelected
+     * @param item
+     * @return item
+     * handles differnt menu map options for the user
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -167,7 +189,14 @@ public class MapActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+    
+    /**
+     *  servicesOK
+     * @return
+     * checks to see fi the connection to pull up the maps has
+     * loaded successfully
+     * if not, will print an error message for user
+     */
     public boolean servicesOK() {
 
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -185,12 +214,23 @@ public class MapActivity extends AppCompatActivity
         return false;
     }
 
+    /**
+     * onMapReady
+     * @param googleMap
+     * this loads the map once the user clicks on the
+     * maps button for event
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         setUpMap();
     }
 
+    /**
+     *  setUpMap
+     * this sets up the map for the user
+     * and enables the location to be set for the user
+     */
     public void setUpMap(){
 
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -245,6 +285,12 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
+    /**
+     *  initMap
+     * @return boolean
+     * this sets up the fragment view for the user to actually see
+     * the maps once it's loaded and been set up, inflates views
+     */
     private boolean initMap() {
         if (mMap == null) {
             SupportMapFragment mapFragment =
@@ -339,18 +385,38 @@ public class MapActivity extends AppCompatActivity
         return (mMap != null);
     }
 
+    /**
+     *  gotoLocation
+     * @param lat
+     * @param lng
+     * @param zoom
+     * once user types in a location, Google Maps will update this
+     * and move the "camera" to the location
+     */
     private void gotoLocation(double lat, double lng, float zoom) {
         LatLng latLng = new LatLng(lat, lng);
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, zoom);
         mMap.moveCamera(update);
     }
 
+    /**
+     *  hideSoftKeyboard
+     * @param v
+     * gets system service for maps
+     */
     private void hideSoftKeyboard(View v) {
         InputMethodManager imm =
                 (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
+    /**
+     *  geoLocate
+     * @param v
+     * @throws IOException
+     * gets lat and long for location typed in by user
+     * and outs a marker on it
+     */
     public void geoLocate(View v) throws IOException {
 
         hideSoftKeyboard(v);
@@ -377,6 +443,14 @@ public class MapActivity extends AppCompatActivity
     }
 
 
+    /**
+     *  addMarker
+     * @param add
+     * @param lat
+     * @param lng
+     * marks a location that user has tried searching for
+     * to move the camera to
+     */
     private void addMarker(Address add, double lat, double lng) {
         MarkerOptions options = new MarkerOptions()
                 .title(add.getLocality())
@@ -415,6 +489,13 @@ public class MapActivity extends AppCompatActivity
 
     }
 
+    /**
+     *  getUrl
+     * @param origin
+     * @param dest
+     * @return string
+     * parses input using json to search for a location through API
+     */
     private String getUrl(LatLng origin, LatLng dest) {
 
         // Origin of route
@@ -439,7 +520,11 @@ public class MapActivity extends AppCompatActivity
     }
 
     /**
+     * downloadUrl
+     * @param strUrl
+     * @return string
      * A method to download json data from url
+     * creates http connection to communicate with url
      */
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
@@ -481,7 +566,14 @@ public class MapActivity extends AppCompatActivity
 
     // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
-
+        
+        /**
+         *  doInBackground
+         * @param url
+         * @return string
+         * fetches and stores data from web service
+         * invokes thread to parse JSON data
+         */
         @Override
         protected String doInBackground(String... url) {
 
@@ -513,6 +605,12 @@ public class MapActivity extends AppCompatActivity
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
         // Parsing the data in non-ui thread
+       /**
+         *  List
+         * @param jsonData
+         * @return List
+         *  create a json object to parse data in non-ui thread
+         */
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
@@ -538,6 +636,12 @@ public class MapActivity extends AppCompatActivity
         }
 
         // Executes in UI thread, after the parsing process
+        /**
+         * function onPostExecute
+         * @param result
+         * executes in UI thread after the parsing process, traverses through all routes
+         * for map
+         */
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points;
@@ -583,6 +687,12 @@ public class MapActivity extends AppCompatActivity
     public class DataParser {
 
         /** Receives a JSONObject and returns a list of lists containing latitude and longitude */
+       /**
+         * function List
+         * @param jObject
+         * Receives a JSONObject and returns a list of lists containing latitude and longitude
+         * 
+         */
         public List<List<HashMap<String, String>>> parse(JSONObject jObject) {
 
             List<List<HashMap<String, String>>> routes = new ArrayList<>();
@@ -632,9 +742,11 @@ public class MapActivity extends AppCompatActivity
 
 
         /**
+         * function List<LatLng>
+         * @param encoded
          * Method to decode polyline points
          * Courtesy : https://jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java
-         * */
+         */
         private List<LatLng> decodePoly(String encoded) {
 
             List<LatLng> poly = new ArrayList<>();
@@ -720,6 +832,12 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * function showCurrentLocation
+     * @param item
+     * shows current location of user,
+     * accesses lat and long to animate camera
+     */
     public void showCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -753,6 +871,13 @@ public class MapActivity extends AppCompatActivity
 
     }
 
+    /**
+     * function onConnected
+     * @param bundle
+     * starts up map once connection is establised
+     * and creates the interactive protion of the map to get
+     * to destination
+     */
     @Override
     public void onConnected(Bundle bundle) {
         Toast.makeText(this, "Ready to map!", Toast.LENGTH_SHORT).show();
