@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 /**
  * Created by Nihar on 4/3/2017.
+ * Java code that connects and establishes local database for app
  */
 
 public class CreateDatabase extends SQLiteOpenHelper{
@@ -42,17 +43,33 @@ public class CreateDatabase extends SQLiteOpenHelper{
 
     private static final String DATABASE_DELETE = "drop table" + TABLE_EVENTS ;
 
+    /**
+     *
+     * @param context
+     * creates the context for DB
+     */
     public CreateDatabase(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     *
+     * @param database
+     * creates/delete DB
+     */
     @Override
     public void onCreate(SQLiteDatabase database){
         //database.execSQL(DATABASE_DELETE);
         database.execSQL(DATABASE_CREATE);
 
     }
-
+    /**
+     *
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     * upgrades DB once user logins if it doesn't exist
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         Log.w(CreateDatabase.class.getName(),
@@ -62,12 +79,15 @@ public class CreateDatabase extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    //ADDED**********
-
-    //star repo JR 4/8
-
-
-    //put id where name is
+    /**
+     * star repo created by Jasmine 4/8
+     */
+    /**
+     * @param id
+     * @return boolean
+     * this function queries out to the database to fill in the binary
+     * field for column_star when a suer favorites an event
+     */
     public int UpdateDatabaseStar (String id,String name)
     {
         SQLiteDatabase star_db = this.getWritableDatabase();
