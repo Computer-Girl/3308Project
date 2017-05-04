@@ -1,6 +1,10 @@
 package dachman.lucas.letsgoapp2;
 /**
+ * @author jasmine
  * Created by Jasmine on 3/19/17.
+ * function Openingpage extends AppCompatActivity
+ * opening page for app once db and app loads and starts
+ * not used for final product
  */
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
