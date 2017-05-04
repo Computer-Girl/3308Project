@@ -4,6 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * @author jasmine
+ * Created by Jasmine 3/20/17
+ * function SplashActivity extends AppCompatActivity
+ * designed to show user logo while
+ * app and database load
+ */
 public class SplashActivity extends AppCompatActivity {
 
     @Override
